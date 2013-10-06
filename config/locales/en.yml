@@ -1,0 +1,9 @@
+en:
+  numbers:
+    "140": "one four zero"
+  wind:
+    winds: "winds"
+    calm: "calm"
+    degrees: "degrees"
+    kt: "knots"
+

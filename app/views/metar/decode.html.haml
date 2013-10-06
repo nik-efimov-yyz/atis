@@ -1,0 +1,17 @@
+%h1= @metar
+
+%h2 WIND ANALYSIS
+%table
+  %tr
+    %th Direction
+    %th Variable?
+    %th Gusting?
+    %th Speed
+    %th Units
+
+  %tr
+    %td= @metar.wind.direction
+    %td= @metar.wind.variable?
+    %td= @metar.wind.gusting?
+    %td= @metar.wind.speed
+    %td= @metar.wind.units

@@ -1,0 +1,21 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: vatatis_development
+  pool: 5
+  username: vatatis
+  password:
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: vatatis_test
+  pool: 5
+  username: vatatis
+  password:
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: vatatis_production
+  pool: 5
+  username: vatatis
+  password:
