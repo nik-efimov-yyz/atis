@@ -1,18 +1,15 @@
 development:
-  adapter: mysql2
+  adapter: sqlite3
   database: vatatis_development
   pool: 5
-  username: vatatis
-  password:
+  database: db/development.sqlite3
 test:
-  adapter: mysql2
+  adapter: sqlite3
   database: vatatis_test
   pool: 5
-  username: vatatis
-  password:
+  database: db/test.sqlite3
 production:
-  adapter: mysql2
+  adapter: sqlite3
   database: vatatis_production
   pool: 5
-  username: vatatis
-  password:
+  database: db/production.sqlite3
