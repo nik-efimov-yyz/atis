@@ -1,22 +1,79 @@
 require "spec_helper"
 
-describe ATIS::Block::Wind do
+describe ATIS::Group::Wind do
 
-  let(:wind) { ATIS::Block::Wind.new(metar_object) }
-  let(:metar_object) { ATIS::Metar.new(metar) }
+  let(:metar_object) { ATIS::METAR.new(metar) }
 
-  let(:metar) { nil }
+  subject { metar_object.wind }
 
-  describe "#direction" do
-
+  context "normal" do
+    let(:metar) { "10006MPS" }
+    it {should_not be_variable}
+    it { should_not be_gusting }
+    its(:direction) { should == 100 }
+    its(:speed) { should == 6}
+    its(:units) { should == "MPS" }
+    its(:direction_v_from) { should be_nil }
+    its(:direction_v_to) { should be_nil }
   end
 
-  describe "#speed" do
-
+  context "direction variable given with VRB" do
+    let(:metar) { "VRB03KT" }
+    it { should be_variable }
+    it { should_not be_gusting }
+    its(:direction) { should == "VRB" }
+    its(:speed) { should == 3 }
+    its(:units) { should == "KT" }
+    its(:direction_v_from) { should be_nil }
+    its(:direction_v_to) { should be_nil }
   end
 
-  describe "#units" do
-
+  context "direction variable given with V" do
+    let(:metar) { "15003MPS 120V180" }
+    it { should be_variable }
+    it { should_not be_gusting }
+    its(:direction) { should == 150 }
+    its(:speed) { should == 3 }
+    its(:units) { should == "MPS" }
+    its(:direction_v_from) { should == 120 }
+    its(:direction_v_to) { should == 180 }
   end
 
+  context "wind gusting" do
+    let(:metar) { "26015G24MPS" }
+    it { should_not be_variable }
+    it { should be_gusting }
+    its(:direction) { should == 260 }
+    its(:speed) { should == (15..24) }
+    its(:units) { should == "MPS" }
+    its(:direction_v_from) { should be_nil }
+    its(:direction_v_to) { should be_nil }
+  end
+
+  context "wind gusting and variable as VRB" do
+    let(:metar) { "VRB10G15MPS" }
+    it { should be_variable }
+    it { should be_gusting }
+    its(:direction) { should == "VRB" }
+    its(:speed) { should == (10..15) }
+    its(:units) { should == "MPS" }
+    its(:direction_v_from) { should be_nil }
+    its(:direction_v_to) { should be_nil }
+  end
+
+  context "wind gusting and variable as V" do
+    let(:metar) { "30006G16MPS 270V340" }
+    it { should be_variable }
+    it { should be_gusting }
+    its(:direction) { should == 300 }
+    its(:speed) { should == (6..16) }
+    its(:units) { should == "MPS" }
+    its(:direction_v_from) { should == 270 }
+    its(:direction_v_to) { should == 340 }
+  end
+
+  context "wind calm" do
+    let(:metar) { "00000MPS" }
+    it { should be_calm }
+  end
 end

@@ -1,5 +1,17 @@
 %h1= @metar
 
+%h2 TIME
+%table
+  %tr
+    %th Hours
+    %th Minutes
+    %th Time Zone
+  %tr
+    %td= @metar.time.hours
+    %td= @metar.time.minutes
+    %td= @metar.time.time_zone
+
+
 %h2 WIND ANALYSIS
 %table
   %tr

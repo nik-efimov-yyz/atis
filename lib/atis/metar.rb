@@ -29,13 +29,15 @@ module ATIS
       CODE
     end
 
-    group :wind
     group :time
+    group :wind
+    group :visibility
+    group :rvr
 
     def fetch(airport_code)
       case @options[:online_source]
         when :vatsim
-          @metar = open("http://metar.vatsim.net/#{airport_code.to_s}").read
+          open("http://metar.vatsim.net/#{airport_code.to_s}").read
         else
           raise "Unknown Online METAR Source"
       end
