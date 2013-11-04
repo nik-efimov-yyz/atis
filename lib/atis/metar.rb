@@ -39,6 +39,7 @@ module ATIS
     group :wind, matches: /(VRB|\d{3})(\d{2}|\d{2}G\d{2})(KT|MPS)( (\d{3})V(\d{3}))?/
     group :visibility, matches: /\s(\d{4})\s/
     group :rvr, matches: /R(\d{2}[RLC]?)\/([\/V\dUDNPM]*)/
+    group :cavok, matches: /\s(CAVOK)\s/
 
     def fetch(airport_code)
       case @options[:online_source]
