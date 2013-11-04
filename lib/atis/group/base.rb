@@ -2,14 +2,8 @@ module ATIS::Group
 
   class Base
 
-    @pattern = nil
-
-    def initialize(metar_object)
-      @metar = metar_object
-    end
-
-    def self.matches(pattern)
-      @pattern = pattern
+    def initialize(match = nil)
+      @match = match
     end
 
     def self.property(name, &block)
@@ -18,12 +12,8 @@ module ATIS::Group
       end
     end
 
-    def self.pattern
-      @pattern
-    end
-
     def match
-      @metar.raw.present? && @metar.raw.match(self.class.pattern)
+      @match
     end
 
     def raw

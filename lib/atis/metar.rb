@@ -21,18 +21,24 @@ module ATIS
 
     end
 
-    def self.group(name)
-      self.class_eval <<-CODE, __FILE__, __LINE__ + 1
-        def #{name.to_s}
-          @#{name.to_s} ||= ATIS::Group::#{name.to_s.camelcase}.new(self)
+    def self.group(name, options = {})
+      define_method(name) do
+        group = []
+        metar_copy = @metar.clone
+        loop do
+          match = metar_copy.match(options[:matches])
+          group << "ATIS::Group::#{name.to_s.camelcase}".constantize.new(match) if group.empty? or match.present?
+          break if match.nil?
+          metar_copy.slice!(match[0])
         end
-      CODE
+        group.count > 1 ? group : group.first
+      end
     end
 
-    group :time
-    group :wind
-    group :visibility
-    group :rvr
+    group :time, matches: /(\d{2})(\d{2})(\d{2})Z/
+    group :wind, matches: /(VRB|\d{3})(\d{2}|\d{2}G\d{2})(KT|MPS)( (\d{3})V(\d{3}))?/
+    group :visibility, matches: /\s(\d{4})\s/
+    group :rvr, matches: /R(\d{2}[RLC]?)\/([\/V\dUDNPM]*)/
 
     def fetch(airport_code)
       case @options[:online_source]
