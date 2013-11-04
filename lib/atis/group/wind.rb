@@ -1,7 +1,5 @@
 class ATIS::Group::Wind < ATIS::Group::Base
 
-  matches /(VRB|\d{3})(\d{2}|\d{2}G\d{2})(KT|MPS)( (\d{3})V(\d{3}))?/
-
   property :direction do
     if match[1] == "VRB"
       match[1]
