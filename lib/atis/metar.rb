@@ -38,7 +38,7 @@ module ATIS
           break if match.nil?
           metar_copy.slice!(match[0])
         end
-        elements.count > 1 ? elements : elements.first
+        elements
       end
     end
 
@@ -48,6 +48,7 @@ module ATIS
     group :rvr, matches: /R(\d{2}[RLC]?)\/([\/V\dUDNPM]*)/
     group :cavok, matches: /\s(CAVOK)\s/
     group :temperature, matches: /\s(M?\d{2})\/(M?\d{2})\s/
+    group :phenomena, matches: /(\+|-|VC)?(#{ATIS::Group::Phenomena::DESCRIPTORS.join("|")})?(#{ATIS::Group::Phenomena::PHENOMENA.join("|")})/
 
     def fetch(airport_code)
       case @options[:online_source]
