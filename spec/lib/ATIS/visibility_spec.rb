@@ -3,7 +3,7 @@ require "spec_helper"
 describe ATIS::Group::Visibility do
   let(:metar_object) { ATIS::METAR.new(metar) }
 
-  subject { metar_object.visibility }
+  subject { metar_object.visibility.first }
 
   context "normal" do
     let(:metar) { "UTSA 4500 " }

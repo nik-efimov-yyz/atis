@@ -4,7 +4,8 @@ describe ATIS::Group::Rvr do
 
   let(:metar_object) { ATIS::METAR.new(metar) }
 
-  subject { metar_object.rvr }
+  subject { rvr }
+  let(:rvr) { metar_object.rvr.first }
 
   describe "single RVR" do
     let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/1300VP2000D FZFG" }
@@ -13,7 +14,7 @@ describe ATIS::Group::Rvr do
   end
 
   describe "#variable?" do
-    subject { metar_object.rvr.variable? }
+    subject { rvr.variable? }
     context "group includes V" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/1300VP2000D FZFG" }
       it { should be_true }
@@ -27,7 +28,7 @@ describe ATIS::Group::Rvr do
   end
 
   describe "#visibility" do
-    subject { metar_object.rvr.visibility }
+    subject { rvr.visibility }
     context "non variable" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/1300" }
       it { should == 1300}
@@ -41,7 +42,7 @@ describe ATIS::Group::Rvr do
   end
 
   describe "#trend" do
-    subject { metar_object.rvr.trend }
+    subject { rvr.trend }
     context "no trend data" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/1300" }
       it { should be_nil }
@@ -65,7 +66,7 @@ describe ATIS::Group::Rvr do
   end
 
   describe "#peak" do
-    subject { metar_object.rvr.peak }
+    subject { rvr.peak }
     context "peak present"  do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/P2000U" }
       it { should be_true }
@@ -79,7 +80,7 @@ describe ATIS::Group::Rvr do
   end
 
   describe "#minimum" do
-    subject { metar_object.rvr.minimum }
+    subject { rvr.minimum }
     context  "minimum present" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/M0050D" }
       it { should be_true }
@@ -91,11 +92,5 @@ describe ATIS::Group::Rvr do
     end
 
   end
-
-  describe "multiple RVRs" do
-    let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/1300VP2000D R23L/1400N FZFG" }
-    its(:count) { should == 2 }
-  end
-
 
 end

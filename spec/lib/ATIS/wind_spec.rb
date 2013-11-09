@@ -4,7 +4,7 @@ describe ATIS::Group::Wind do
 
   let(:metar_object) { ATIS::METAR.new(metar) }
 
-  subject { metar_object.wind }
+  subject { metar_object.wind.first }
 
   context "normal" do
     let(:metar) { "10006MPS" }

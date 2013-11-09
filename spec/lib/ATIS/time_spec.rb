@@ -4,7 +4,7 @@ describe ATIS::Group::Time do
 
   let(:metar_object) { ATIS::METAR.new(metar) }
 
-  subject { metar_object.time }
+  subject { metar_object.time.first }
 
   context "normal" do
     let(:metar) { "031330Z" }

@@ -4,7 +4,7 @@ describe ATIS::Group::Cavok do
 
   let(:metar_object) { ATIS::METAR.new(metar) }
 
-  subject { metar_object.cavok }
+  subject { metar_object.cavok.first }
 
   context "normal" do
     let(:metar) { " CAVOK " }
