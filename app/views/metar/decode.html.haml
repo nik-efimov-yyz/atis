@@ -1,5 +1,10 @@
 %h1= @metar
 
+%h2 VOICE SCRIPT
+%p= @metar.to_voice_script
+
+= audio_tag "http://translate.google.com/translate_tts?tl=ru&q='#{@metar.to_voice_script}'", controls: true
+
 %h2 TIME
 %table
   %tr

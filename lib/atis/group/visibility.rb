@@ -8,4 +8,11 @@ class ATIS::Group::Visibility < ATIS::Group::Base
     visibility == 9999
   end
 
+  voice_message do
+    if unlimited?
+
+    end
+
+  end
+
 end

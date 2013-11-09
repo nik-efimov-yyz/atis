@@ -5,6 +5,8 @@ module ATIS
 
   class METAR
 
+    cattr_accessor(:groups) { [] }
+
     def initialize(string_or_airport = nil, options = {})
       @options = options.reverse_merge(
           online_source: :vatsim
@@ -22,16 +24,21 @@ module ATIS
     end
 
     def self.group(name, options = {})
+
+      groups << name
+
       define_method(name) do
-        group = []
+        return "ATIS::Group::#{name.to_s.camelcase}".constantize.new unless @metar.present?
+
+        elements = []
         metar_copy = @metar.clone
         loop do
           match = metar_copy.match(options[:matches])
-          group << "ATIS::Group::#{name.to_s.camelcase}".constantize.new(match) if group.empty? or match.present?
+          elements << "ATIS::Group::#{name.to_s.camelcase}".constantize.new(match) if elements.empty? or match.present?
           break if match.nil?
           metar_copy.slice!(match[0])
         end
-        group.count > 1 ? group : group.first
+        elements.count > 1 ? elements : elements.first
       end
     end
 
@@ -56,6 +63,14 @@ module ATIS
 
     def to_s
       @metar
+    end
+
+    def to_voice_script
+      voice_processor.compile_from_groups(groups).gsub(/[\[\]]/, '')
+    end
+
+    def voice_processor
+      @voice_processor ||= ATIS::Voice::Processor.new(self)
     end
 
   end

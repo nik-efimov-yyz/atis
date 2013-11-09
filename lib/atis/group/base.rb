@@ -12,6 +12,12 @@ module ATIS::Group
       end
     end
 
+    def self.voice_message(schema = :default, &block)
+      define_method :to_voice do
+        instance_eval &block if match.present?
+      end
+    end
+
     def match
       @match
     end
@@ -21,6 +27,8 @@ module ATIS::Group
     end
 
     alias :to_s :raw
+
+
 
     protected
 

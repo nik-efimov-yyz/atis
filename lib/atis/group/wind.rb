@@ -48,4 +48,18 @@ class ATIS::Group::Wind < ATIS::Group::Base
     end
   end
 
+  voice_message do
+    parts = ["[ветер у земли]"]
+    if calm?
+      parts << "[тихий]"
+
+    elsif gusting?
+
+    elsif variable?
+      parts << "[неустойчивый]"
+      parts << "[от] [#{direction_v_from}]" if direction_v_from.present?
+    end
+    parts.join(" ")
+  end
+
 end

@@ -5,11 +5,16 @@ class ATIS::Group::Time < ATIS::Group::Base
   end
 
   property :minutes do
-    match[3].to_i
+    sprintf("%02d", match[3]).to_i
   end
 
   property :time_zone do
     "Z"
   end
+
+  voice_message do
+    "[#{hours}] [#{minutes}]"
+  end
+
 end
 

@@ -38,6 +38,10 @@ class ATIS::Group::Rvr < ATIS::Group::Base
     visibility_block.match(/M/).present?
   end
 
+  voice_message do
+
+  end
+
   private
 
   def visibility_block
