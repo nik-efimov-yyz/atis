@@ -47,6 +47,7 @@ module ATIS
     group :visibility, matches: /\s(\d{4})\s/
     group :rvr, matches: /R(\d{2}[RLC]?)\/([\/V\dUDNPM]*)/
     group :cavok, matches: /\s(CAVOK)\s/
+    group :temperature, matches: /\s(M?\d{2})\/(M?\d{2})\s/
 
     def fetch(airport_code)
       case @options[:online_source]
