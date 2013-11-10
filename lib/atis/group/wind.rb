@@ -24,11 +24,11 @@ class ATIS::Group::Wind < ATIS::Group::Base
     (match[1] =~ /VRB/).present? or match[4].present?
   end
 
-  property :direction_v_from do
+  property :variable_from do
     match[5] && match[5].to_i
   end
 
-  property :direction_v_to do
+  property :variable_to do
     match[6] && match[6].to_i
   end
 
@@ -46,20 +46,6 @@ class ATIS::Group::Wind < ATIS::Group::Base
     else
       nil
     end
-  end
-
-  voice_message do
-    parts = ["[ветер у земли]"]
-    if calm?
-      parts << "[тихий]"
-
-    elsif gusting?
-
-    elsif variable?
-      parts << "[неустойчивый]"
-      parts << "[от] [#{direction_v_from}]" if direction_v_from.present?
-    end
-    parts.join(" ")
   end
 
 end

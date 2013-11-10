@@ -12,7 +12,7 @@ describe ATIS::Group::SkyCondition do
     its(:no_significant_cloud?) { should be_false }
     it { should_not be_vertical_visibility }
     its(:cover) { should be_nil }
-    its(:altitude) { should be_nil }
+    its(:height) { should be_nil }
     its(:cloud_type) { should be_nil }
   end
 
@@ -22,7 +22,7 @@ describe ATIS::Group::SkyCondition do
     its(:no_significant_cloud?) { should be_true }
     it { should_not be_vertical_visibility }
     its(:cover) { should be_nil }
-    its(:altitude) { should be_nil }
+    its(:height) { should be_nil }
     its(:cloud_type) { should be_nil }
   end
 
@@ -32,7 +32,7 @@ describe ATIS::Group::SkyCondition do
     its(:no_significant_cloud?) { should be_false }
     it { should_not be_vertical_visibility }
     its(:cover) { should == "OVC" }
-    its(:altitude) { should == 5000 }
+    its(:height) { should == 5000 }
     its(:cloud_type) { should be_nil }
   end
 
@@ -42,7 +42,7 @@ describe ATIS::Group::SkyCondition do
     its(:no_significant_cloud?) { should be_false }
     it { should_not be_vertical_visibility }
     its(:cover) { should == "OVC" }
-    its(:altitude) { should == 5000 }
+    its(:height) { should == 5000 }
     its(:cloud_type) { should == "CB" }
   end
 
@@ -52,7 +52,7 @@ describe ATIS::Group::SkyCondition do
     its(:no_significant_cloud?) { should be_false }
     it { should be_vertical_visibility }
     its(:cover) { should be_nil }
-    its(:altitude) { should == 500 }
+    its(:height) { should == 500 }
     its(:cloud_type) { should be_nil }
   end
 

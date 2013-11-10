@@ -65,8 +65,8 @@ describe ATIS::Group::Rvr do
 
   end
 
-  describe "#peak" do
-    subject { rvr.peak }
+  describe "#peak?" do
+    subject { rvr.peak? }
     context "peak present"  do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/P2000U" }
       it { should be_true }
@@ -79,8 +79,8 @@ describe ATIS::Group::Rvr do
 
   end
 
-  describe "#minimum" do
-    subject { rvr.minimum }
+  describe "#minimum?" do
+    subject { rvr.minimum? }
     context  "minimum present" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/M0050D" }
       it { should be_true }

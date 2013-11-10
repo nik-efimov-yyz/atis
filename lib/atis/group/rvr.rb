@@ -4,6 +4,18 @@ class ATIS::Group::Rvr < ATIS::Group::Base
     match[1]
   end
 
+  property :runway_number do
+    if runway.match(/(\d{2})/).present?
+      $1
+    end
+  end
+
+  property :runway_suffix do
+    if runway.match(/(L|C|R)/).present?
+      $1
+    end
+  end
+
   property :variable? do
     visibility_block.match("V").present?
   end
@@ -30,11 +42,11 @@ class ATIS::Group::Rvr < ATIS::Group::Base
     end
   end
 
-  property :peak do
+  property :peak? do
     visibility_block.match(/P/).present?
   end
 
-  property :minimum do
+  property :minimum? do
     visibility_block.match(/M/).present?
   end
 

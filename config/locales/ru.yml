@@ -1,0 +1,33 @@
+ru:
+
+  rvr:
+    prefix: "дальность видимости на ВПП"
+    l: "левая"
+    r: "правая"
+    c: "центральная"
+    peak: "более"
+    minimum: "менее"
+    from: "от"
+    to: "до"
+  skycondition:
+    clear: "ясно"
+    no_significant_cloud: "без существенной облачности"
+    vertical_visibility: "вертикальная видимость"
+    few: "незначительная"
+    sct: "рассеянная"
+    bkn: "значительая"
+    ovc: "сплошная"
+    cb: "кучево-дождевая"
+    tcu: "мощно-кучевая"
+  visibility:
+    prefix: "видимость"
+    unlimited: "более 10 километров"
+    kilometers: "километров"
+  wind:
+    prefix: "ветер у земли"
+    calm: "тихо"
+    variable: "неустойчивый"
+    variable_from: "от"
+    variable_to: "до"
+    degrees: "градусов"
+    gusting_to: "порывы"
