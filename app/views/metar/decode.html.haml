@@ -1,34 +1,4 @@
-%h1= @metar
+%h1= @message.metar
 
 %h2 VOICE SCRIPT
-%p= @metar.to_voice_script
-
-= audio_tag "http://translate.google.com/translate_tts?tl=ru&q='#{@metar.to_voice_script}'", controls: true
-
-%h2 TIME
-%table
-  %tr
-    %th Hours
-    %th Minutes
-    %th Time Zone
-  %tr
-    %td= @metar.time.hours
-    %td= @metar.time.minutes
-    %td= @metar.time.time_zone
-
-
-%h2 WIND ANALYSIS
-%table
-  %tr
-    %th Direction
-    %th Variable?
-    %th Gusting?
-    %th Speed
-    %th Units
-
-  %tr
-    %td= @metar.wind.direction
-    %td= @metar.wind.variable?
-    %td= @metar.wind.gusting?
-    %td= @metar.wind.speed
-    %td= @metar.wind.units
+%p= @message.text_in :ru

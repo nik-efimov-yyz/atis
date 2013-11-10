@@ -18,7 +18,7 @@ class ATIS::Group::SkyCondition < ATIS::Group::Base
     match[2] and match[2].match(/(#{COVER_CODES.join("|")})/).present? ? match[2] : nil
   end
 
-  property :altitude do
+  property :height do
     (cover or vertical_visibility?) and match[3].to_i * 100
   end
 

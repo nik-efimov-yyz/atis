@@ -13,8 +13,8 @@ describe ATIS::Group::Wind do
     its(:direction) { should == 100 }
     its(:speed) { should == 6}
     its(:units) { should == "MPS" }
-    its(:direction_v_from) { should be_nil }
-    its(:direction_v_to) { should be_nil }
+    its(:variable_from) { should be_nil }
+    its(:variable_to) { should be_nil }
   end
 
   context "direction variable given with VRB" do
@@ -24,8 +24,8 @@ describe ATIS::Group::Wind do
     its(:direction) { should == "VRB" }
     its(:speed) { should == 3 }
     its(:units) { should == "KT" }
-    its(:direction_v_from) { should be_nil }
-    its(:direction_v_to) { should be_nil }
+    its(:variable_from) { should be_nil }
+    its(:variable_to) { should be_nil }
   end
 
   context "direction variable given with V" do
@@ -35,8 +35,8 @@ describe ATIS::Group::Wind do
     its(:direction) { should == 150 }
     its(:speed) { should == 3 }
     its(:units) { should == "MPS" }
-    its(:direction_v_from) { should == 120 }
-    its(:direction_v_to) { should == 180 }
+    its(:variable_from) { should == 120 }
+    its(:variable_to) { should == 180 }
   end
 
   context "wind gusting" do
@@ -46,8 +46,8 @@ describe ATIS::Group::Wind do
     its(:direction) { should == 260 }
     its(:speed) { should == (15..24) }
     its(:units) { should == "MPS" }
-    its(:direction_v_from) { should be_nil }
-    its(:direction_v_to) { should be_nil }
+    its(:variable_from) { should be_nil }
+    its(:variable_to) { should be_nil }
   end
 
   context "wind gusting and variable as VRB" do
@@ -57,8 +57,8 @@ describe ATIS::Group::Wind do
     its(:direction) { should == "VRB" }
     its(:speed) { should == (10..15) }
     its(:units) { should == "MPS" }
-    its(:direction_v_from) { should be_nil }
-    its(:direction_v_to) { should be_nil }
+    its(:variable_from) { should be_nil }
+    its(:variable_to) { should be_nil }
   end
 
   context "wind gusting and variable as V" do
@@ -68,8 +68,8 @@ describe ATIS::Group::Wind do
     its(:direction) { should == 300 }
     its(:speed) { should == (6..16) }
     its(:units) { should == "MPS" }
-    its(:direction_v_from) { should == 270 }
-    its(:direction_v_to) { should == 340 }
+    its(:variable_from) { should == 270 }
+    its(:variable_to) { should == 340 }
   end
 
   context "wind calm" do
