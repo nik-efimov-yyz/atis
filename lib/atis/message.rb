@@ -1,24 +1,60 @@
 class ATIS::Message
 
-  attr_accessor :blocks, :metar
+  DEFAULT_MESSAGE_SECTIONS = [
+      :aerodrome,
+      :message_index,
+      :approach_types,
+      :arrival_runways,
+      :departure_runways,
+      :transition_level,
+      :extra_information,
+      :wind,
+      :visibility,
+      :rvr,
+      :phenomena,
+      :sky_condition,
+      :obstructions,
+      :temperature,
+      :pressure
+  ]
+
+  attr_accessor :sections, :metar, :options
 
   def initialize(metar_or_airport_code, options = {})
-    @metar = ATIS::METAR.new(metar_or_airport_code)
-    @blocks = [
-      ATIS::Message::Block::Airport.new(self),
-      ATIS::Message::Block::Wind.new(self),
-      ATIS::Message::Block::Visibility.new(self),
-      ATIS::Message::Block::Rvr.new(self),
-      ATIS::Message::Block::SkyCondition.new(self)
-    ]
+    @metar = METAR::Report.new(metar_or_airport_code)
+    @sections = DEFAULT_MESSAGE_SECTIONS
+    @options = options
   end
 
-  def text_in(language = :en)
-    blocks.inject("") do |message, block|
-      block_text = block.text_in(language)
-      message << block_text if block_text.present?
-      message
-    end
+  def render_in(language = :en)
+    sections.inject([]) do |array, section_name|
+      section = "ATIS::Section::#{section_name.to_s.camelize}".constantize.new(self)
+      array << section.render_in(language)
+    end.join(" ")
+  end
+
+  def index
+    @options[:index] && @options[:index].to_sym
+  end
+
+  def arrival_runways
+    @options[:arrival_runways] ||= []
+  end
+
+  def approach_types
+    @options[:approach_types] ||= []
+  end
+
+  def departure_runways
+    @options[:departure_runways] ||= []
+  end
+
+  def transition_level
+    @options[:transition_level] ||= []
+  end
+
+  def extra
+    @options[:extra] ||= []
   end
 
 end

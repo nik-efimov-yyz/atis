@@ -1,4 +1,14 @@
-%h1= @message.metar
+.container
+  .row
+    .col-md-12
+      .well.lead= @message.metar
 
-%h2 VOICE SCRIPT
-%p= @message.text_in :ru
+  .row
+    .col-md-12
+      .well= @message.render_in :ru
+
+  .row
+    .col-md-12
+      %h3 DATA
+  .row
+    .col-md-12= render "metar/table", metar: @message.metar

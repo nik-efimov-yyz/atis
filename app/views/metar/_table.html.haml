@@ -1,0 +1,12 @@
+- metar.groups.each do |name|
+  - group = metar.send(name)
+  %h4= name
+  %table.table.table-condensed.table-striped.table-bordered
+    - group.each_with_index do |node, index|
+      - if index == 0
+        %tr
+          - node.properties.each do |property|
+            %th= property
+      %tr
+        - node.properties.each do |property|
+          %td= node.send(property)
