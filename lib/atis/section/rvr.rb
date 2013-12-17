@@ -10,7 +10,7 @@ class ATIS::Section::Rvr < ATIS::Section::Base
     f.block :prefix
     metar.rvr.each do |rvr|
       f.block rvr.runway_number
-      f.block rvr.runway_suffix.downcase.to_sym if rvr.runway_suffix.present?
+      f.block rvr.runway_suffix.downcase.to_sym, scope: :runway if rvr.runway_suffix.present?
 
       if rvr.variable?
         f.block :variable
