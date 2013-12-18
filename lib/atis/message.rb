@@ -65,4 +65,8 @@ class ATIS::Message
     @options[:report_pressure_in] ||= ["QFE"]
   end
 
+  def languages
+    @options[:languages] ||= ["ru", "en"]
+  end
+
 end

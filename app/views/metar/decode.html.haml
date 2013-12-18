@@ -5,7 +5,8 @@
 
   .row
     .col-md-12
-      .well= @message.render_in :ru
+      - @message.languages.each do |lang|
+        .well= @message.render_in lang.to_sym
 
   .row
     .col-md-12

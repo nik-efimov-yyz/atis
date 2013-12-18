@@ -24,11 +24,6 @@ class ATIS::Section::Pressure < ATIS::Section::Base
       end
 
     end
-    #f.text message.report_pressure_in.downcase.to_sym
-    #f.text mm_from_hpa(qfe_from(pressure.pressure))
-    #f.block :or
-    #f.text qfe_from(pressure.pressure)
-    #f.block :hpa
   end
 
   def pressure

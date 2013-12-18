@@ -54,7 +54,7 @@ class ATIS::Section::Base
   end
 
   def render_in(language = :en, options = {})
-    raise "format not specified for #{language}" unless formats[language].present?
+    raise "format not specified for #{language} in #{self.class}" unless formats[language].present?
 
     return "" if source_empty?
 

@@ -16,7 +16,8 @@ class MetarController < ApplicationController
         index: params[:info].try(:downcase),
         transition_level: params[:trlvl],
         extra: params[:extra] && params[:extra].split(","),
-        report_pressure_in: params[:pt] && params[:pt].split(",")
+        report_pressure_in: params[:pt] && params[:pt].split(","),
+        languages: params[:lang] && params[:lang].split(",")
     }
   end
 

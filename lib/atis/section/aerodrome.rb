@@ -1,7 +1,6 @@
 class ATIS::Section::Aerodrome < ATIS::Section::Base
 
-  format :en do
-    "English cloud stuff"
+  format :en do |f|
   end
 
   format :ru do |f|
