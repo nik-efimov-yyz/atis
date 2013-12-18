@@ -9,13 +9,17 @@ class ATIS::Message
       :transition_level,
       :extra_information,
       :wind,
+      :cavok,
       :visibility,
       :rvr,
       :phenomena,
       :sky_condition,
       :obstructions,
       :temperature,
-      :pressure
+      :pressure,
+      :windshear,
+      :icing,
+      :turbulence
   ]
 
   attr_accessor :sections, :metar, :options

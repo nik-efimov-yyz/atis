@@ -11,7 +11,7 @@ class METAR::Report
   def initialize(icao_or_metar, options = {})
     @options = options.reverse_merge(source: :vatsim)
     @metar = icao_or_metar.length <= 4 ? fetch(icao_or_metar) : icao_or_metar
-
+    @metar = @metar + " "
     clean_up
 
   end
@@ -29,6 +29,9 @@ class METAR::Report
   group :runway_condition, matches: /\sR?(\d{2}(?:L|R|C)?)\/?(\d{1}|\/{1}|C)(\d{1}|\/{1}|L)(\d{2}|\/{2}|RD)(\d{2}|\/{2})\s/
   group :cavok, matches: /\s(CAVOK)\s/
   group :qbb, matches: /\sQBB(\d{3})\s/, in: [:metar, :trend]
+  group :windshear, matches: /\sWS (ALL RWY|RWY (\d{2}(?:L|R|C)))\s/
+  group :icing, matches: /\s(MOD|FBL|SEV)\s(ICE)\s(?:(INC)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
+  group :turbulence, matches: /\s(MOD|FBL|SEV)\s(TURB)\s(?:(INC|IAO)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
 
   private
 
