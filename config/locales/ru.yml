@@ -150,6 +150,7 @@ ru:
     qnh: "QNH"
     or: "или"
     hpa: "гпа"
+    pressure: "давление"
 
   runway:
     l: "левая"
@@ -184,6 +185,7 @@ ru:
     upward: "улучшается"
     downward: "ухудшается"
     no_change: "без изменений"
+
   skycondition:
     clear: "ясно"
     no_significant_cloud: "без существенной облачности"

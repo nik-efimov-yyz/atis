@@ -3,11 +3,32 @@ class ATIS::Section::Pressure < ATIS::Section::Base
   uses :metar, group: :pressure
 
   format :ru do |f|
-    f.block :prefix
-    f.text mm_from_hpa(qfe_from(pressure.pressure))
-    f.block :or
-    f.text qfe_from(pressure.pressure)
-    f.block :hpa
+    message.report_pressure_in.each do |pressure_type|
+      if message.report_pressure_in == ["QFE"]
+        f.block :pressure
+      else
+        f.block pressure_type.downcase.to_sym
+      end
+
+      case pressure_type.downcase.to_sym
+        when :qfe
+          f.text mm_from_hpa(qfe_from(pressure.pressure))
+          f.block :or
+          f.text qfe_from(pressure.pressure)
+          f.block :hpa
+        when :qnh
+          f.text pressure.pressure
+          f.block :hpa
+          f.block :or
+          f.text mm_from_hpa(pressure.pressure)
+      end
+
+    end
+    #f.text message.report_pressure_in.downcase.to_sym
+    #f.text mm_from_hpa(qfe_from(pressure.pressure))
+    #f.block :or
+    #f.text qfe_from(pressure.pressure)
+    #f.block :hpa
   end
 
   def pressure
@@ -24,6 +45,6 @@ class ATIS::Section::Pressure < ATIS::Section::Base
   end
 
   def mm_from_hpa(hpa)
-    (hpa * 0.750098697).round
+    (hpa.to_i * 0.750098697).round
   end
 end

@@ -15,7 +15,8 @@ class MetarController < ApplicationController
         departure_runways: params[:dep] && params[:dep].split(","),
         index: params[:info].try(:downcase),
         transition_level: params[:trlvl],
-        extra: params[:extra] && params[:extra].split(",")
+        extra: params[:extra] && params[:extra].split(","),
+        report_pressure_in: params[:pt] && params[:pt].split(",")
     }
   end
 

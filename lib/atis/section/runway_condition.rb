@@ -37,13 +37,33 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
       if rwy.condition != :clear_and_dry || rwy.friction_index.to_f <= 0.6
 
         f.block :friction_index
-        rwy.friction_index.to_s.split(".").each do |part|
-          f.block part
+
+        if rwy.friction_index.present?
+
+          rwy.friction_index.to_s.split(".").each do |part|
+            f.block part
+          end
+
+        elsif rwy.braking_action.present?
+          f.text guess_friction_from_braking_action(rwy.braking_action)
         end
 
       end
 
     end
+
+  end
+
+  def guess_friction_from_braking_action(braking_action)
+    keys = {
+        poor: 0..25,
+        poor_to_medium: 26..29,
+        medium: 30..35,
+        medium_to_good: 36..39,
+        good: 40..90
+    }
+
+    keys[braking_action].to_a.sample
 
   end
 

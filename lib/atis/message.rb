@@ -61,4 +61,8 @@ class ATIS::Message
     @options[:extra] ||= []
   end
 
+  def report_pressure_in
+    @options[:report_pressure_in] ||= ["QFE"]
+  end
+
 end

@@ -6,11 +6,11 @@ class ATIS::Section::DepartureRunways < ATIS::Section::RunwayInformation
     f.block :prefix
     message.departure_runways.each do |rwy|
 
-      f.block :runway
+      f.block :runway, scope: :runway
 
       runway_number, side = rwy.split(/(L|R|C)/)
       f.block runway_number
-      f.block side.downcase.to_sym if side.present?
+      f.block side.downcase.to_sym, scope: :runway if side.present?
 
       if !message.arrival_runways.include?(rwy) and rwy_cond = runway_condition_for(rwy)
         f.text rwy_cond
