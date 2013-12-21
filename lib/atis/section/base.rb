@@ -66,7 +66,7 @@ class ATIS::Section::Base
 
     # Calling the appropriate format to load up blocks
     instance_exec options, &formats[language]
-    @blocks.map { |b| b.render locale: language, scope: self.class.name.demodulize.downcase.to_sym }.join(" ")
+    @blocks.map { |b| b.render locale: language, scope: self.class.name.demodulize.downcase.to_sym }.join
   end
 
   def source

@@ -1,7 +1,5 @@
 <%
-
   @message.languages.each do |lang|
-    concat @message.render_in(lang.to_sym)
+    concat @message.render_in(lang.to_sym).encode("windows-1251")
   end
-
 %>
