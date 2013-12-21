@@ -4,12 +4,8 @@ class METAR::Node::Time < METAR::Node::Base
     match[1].to_i
   end
 
-  property :hours do
-    match[2].to_i
-  end
-
-  property :minutes do
-    sprintf("%02d", match[3]).to_i
+  property :time do
+    match[2].to_s
   end
 
   property :time_zone do

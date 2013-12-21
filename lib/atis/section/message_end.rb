@@ -1,16 +1,15 @@
-class ATIS::Section::MessageIndex < ATIS::Section::Base
+class ATIS::Section::MessageEnd < ATIS::Section::Base
 
   uses :index
 
   format :en do
-    block :atis
-    block :information
+    block :end_message, scope: :end
+    block :information, scope: :end
     block message.index, scope: :phonetics if message.index.present?
   end
 
   format :ru do
-    block :atis
-    block :information
+    block :end_message, scope: :end
     block message.index, scope: :phonetics if message.index.present?
   end
 

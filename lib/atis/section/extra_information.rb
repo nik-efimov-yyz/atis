@@ -2,10 +2,18 @@ class ATIS::Section::ExtraInformation < ATIS::Section::Base
 
   uses :extra
 
-  format :ru do |f|
+  format :en do
 
     source.each do |e|
-      f.block e.to_sym
+      block e.to_sym
+    end
+
+  end
+
+  format :ru do
+
+    source.each do |e|
+      block e.to_sym
     end
 
   end

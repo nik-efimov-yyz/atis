@@ -2,13 +2,22 @@ class ATIS::Section::Temperature < ATIS::Section::Base
 
   uses :metar, group: :temperature
 
-  format :ru do |f|
-    f.block :prefix
-    f.block :minus, scope: :numbers if temperature.temperature < 0
-    f.block temperature.temperature.abs
-    f.block :dew_point
-    f.block :minus, scope: :numbers if temperature.dew_point < 0
-    f.block temperature.dew_point.abs
+  format :en do
+    block :prefix
+    block :minus, scope: :numbers if temperature.temperature < 0
+    text temperature.temperature.abs
+    block :dew_point
+    block :minus, scope: :numbers if temperature.dew_point < 0
+    text temperature.dew_point.abs
+  end
+
+  format :ru do
+    block :prefix
+    block :minus, scope: :numbers if temperature.temperature < 0
+    block temperature.temperature.abs
+    block :dew_point
+    block :minus, scope: :numbers if temperature.dew_point < 0
+    block temperature.dew_point.abs
   end
 
   def temperature

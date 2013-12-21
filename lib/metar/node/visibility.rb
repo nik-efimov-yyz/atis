@@ -8,6 +8,10 @@ class METAR::Node::Visibility < METAR::Node::Base
     visibility == 9999
   end
 
+  property :less_than_50? do
+    visibility.to_i < 50
+  end
+
   property :units do
     match[2].present? ? match[2] : "M"
   end

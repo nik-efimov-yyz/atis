@@ -3,7 +3,7 @@ require "open-uri"
 class METAR::Report
   include METAR::Report::Extensions
 
-  attr_accessor :metar, :trend
+  attr_accessor :metar, :trend, :trend_type
 
   alias :raw :metar
   alias :to_s :metar
@@ -13,13 +13,12 @@ class METAR::Report
     @metar = icao_or_metar.length <= 4 ? fetch(icao_or_metar) : icao_or_metar
     @metar = @metar + " "
     clean_up
-
   end
 
   group :aerodrome, matches: /^[A-Z]{4}\s/
-  group :time, matches: /\s(\d{2})(\d{2})(\d{2})Z\s/
+  group :time, matches: /\s(\d{2})(\d{4})Z\s/
   group :wind, matches: /\s(VRB|\d{3})(\d{2}|\d{2}G\d{2})(KT|MPS)( (\d{3})V(\d{3}))?\s/
-  group :visibility, matches: /\s(\d{1,4})(SM)?\s/
+  group :visibility, matches: /\sP?(\d{1,4})(SM)?\s/, in: [:metar, :trend]
   group :rvr, matches: /\sR(\d{2}[RLC]?)\/(M|P)?(\d{4})(V?)(P?)(\d{4}?)(U|D|N)?\s/
   group :phenomena, matches: /\s(\+|-|VC)?(#{METAR::Node::Phenomena::DESCRIPTORS.join("|")})?(#{METAR::Node::Phenomena::PHENOMENA.join("|")})\s/
   group :sky_condition, matches: /\s(SKC|NSC|(FEW|SCT|BKN|OVC|VV)(\d{3})(TCU|CB)?)\s/
@@ -33,6 +32,10 @@ class METAR::Report
   group :icing, matches: /\s(MOD|FBL|SEV)\s(ICE)\s(?:(INC)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
   group :turbulence, matches: /\s(MOD|FBL|SEV)\s(TURB)\s(?:(INC|IAO)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
 
+  def full_report
+    [@metar, @trend].compact.join(" ")
+  end
+
   private
 
   def fetch(icao_code)
@@ -45,7 +48,7 @@ class METAR::Report
   end
 
   def clean_up
-    @metar, separator, @trend = @metar.split(/(TEMPO|BECMG|NOSIG)/)
+    @metar, @trend_type, @trend = @metar.split(/(TEMPO|BECMG|NOSIG)/)
   end
 
 end

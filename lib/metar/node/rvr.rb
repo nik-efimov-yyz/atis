@@ -24,7 +24,7 @@ class METAR::Node::Rvr < METAR::Node::Base
     if variable?
       match[3].to_i..match[6].to_i
     else
-      match[3].to_i
+      match[3]
     end
   end
 

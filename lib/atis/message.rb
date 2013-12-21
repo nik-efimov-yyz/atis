@@ -1,40 +1,46 @@
 class ATIS::Message
 
-  DEFAULT_MESSAGE_SECTIONS = [
-      :aerodrome,
-      :message_index,
-      :approach_types,
-      :arrival_runways,
-      :departure_runways,
-      :transition_level,
-      :extra_information,
-      :wind,
-      :cavok,
-      :visibility,
-      :rvr,
-      :phenomena,
-      :sky_condition,
-      :obstructions,
-      :temperature,
-      :pressure,
-      :windshear,
-      :icing,
-      :turbulence
-  ]
+  include ATIS::Message::Sectionable
 
-  attr_accessor :sections, :metar, :options
+  section :aerodrome
+  section :message_index
+  section :time
+  section :approach_types
+  section :arrival_runways
+  section :departure_runways
+  section :transition_level
+  section :extra_information
+  section :wind
+  section :cavok
+  section :visibility
+  section :rvr
+  section :phenomena
+  section :sky_condition
+  section :obstructions
+  section :temperature
+  section :pressure
+  section :windshear
+  section :icing
+  section :turbulence
+  section :trend
+  section :wind, from: :trend
+  section :visibility, from: :trend
+  section :phenomena, from: :trend
+  section :sky_condition, from: :trend
+  section :message_end
+
+  attr_accessor :metar, :options
 
   def initialize(metar_or_airport_code, options = {})
     @metar = METAR::Report.new(metar_or_airport_code)
-    @sections = DEFAULT_MESSAGE_SECTIONS
     @options = options
   end
 
   def render_in(language = :en)
-    sections.inject([]) do |array, section_name|
-      section = "ATIS::Section::#{section_name.to_s.camelize}".constantize.new(self)
+    self.class.sections.inject([]) do |array, section_hash|
+      section = "ATIS::Section::#{section_hash[:name].to_s.camelize}".constantize.new(self, section_hash[:options])
       array << section.render_in(language)
-    end.join(" ")
+    end.compact.join(" ")
   end
 
   def index
