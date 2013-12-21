@@ -4,11 +4,8 @@ class ATIS::Section::Pressure < ATIS::Section::Base
 
   format :en do
     message.report_pressure_in.each do |pressure_type|
-      if message.report_pressure_in == ["QFE"]
-        block :pressure
-      else
-        block pressure_type.downcase.to_sym
-      end
+
+      block pressure_type.downcase.to_sym
 
       case pressure_type.downcase.to_sym
         when :qfe

@@ -18,7 +18,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
         when :damp
 
         when :wet
-          if rwy.depth > 0
+          if rwy.depth.present? and rwy.depth > 0
             block :patches_of
             block :water
           end
@@ -58,7 +58,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
         when :damp
 
         when :wet
-          if rwy.depth > 0
+          if rwy.depth.present? and rwy.depth > 0
             block :patches_of
             block :water
           end
