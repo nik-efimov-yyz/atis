@@ -2,49 +2,49 @@ class ATIS::Section::Pressure < ATIS::Section::Base
 
   uses :metar, group: :pressure
 
-  format :en do |f|
+  format :en do
     message.report_pressure_in.each do |pressure_type|
       if message.report_pressure_in == ["QFE"]
-        f.block :pressure
+        block :pressure
       else
-        f.block pressure_type.downcase.to_sym
+        block pressure_type.downcase.to_sym
       end
 
       case pressure_type.downcase.to_sym
         when :qfe
-          f.text mm_from_hpa(qfe_from(pressure.pressure))
-          f.block :mm
-          f.block :or
-          f.text qfe_from(pressure.pressure)
+          text mm_from_hpa(qfe_from(pressure.pressure))
+          block :mm
+          block :or
+          text qfe_from(pressure.pressure)
         when :qnh
-          f.text pressure.pressure
-          f.block :or
-          f.text mm_from_hpa(pressure.pressure)
-          f.block :mm
+          text pressure.pressure
+          block :or
+          text mm_from_hpa(pressure.pressure)
+          block :mm
       end
 
     end
   end
 
-  format :ru do |f|
+  format :ru do
     message.report_pressure_in.each do |pressure_type|
       if message.report_pressure_in == ["QFE"]
-        f.block :pressure
+        block :pressure
       else
-        f.block pressure_type.downcase.to_sym
+        block pressure_type.downcase.to_sym
       end
 
       case pressure_type.downcase.to_sym
         when :qfe
-          f.text mm_from_hpa(qfe_from(pressure.pressure))
-          f.block :or
-          f.text qfe_from(pressure.pressure)
-          f.block :hpa
+          text mm_from_hpa(qfe_from(pressure.pressure))
+          block :or
+          text qfe_from(pressure.pressure)
+          block :hpa
         when :qnh
-          f.text pressure.pressure
-          f.block :hpa
-          f.block :or
-          f.text mm_from_hpa(pressure.pressure)
+          text pressure.pressure
+          block :hpa
+          block :or
+          text mm_from_hpa(pressure.pressure)
       end
 
     end

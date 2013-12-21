@@ -2,84 +2,84 @@ class ATIS::Section::Wind < ATIS::Section::Base
 
   uses :metar, group: :wind
 
-  format :en do |f|
-    f.block :prefix
+  format :en do
+    block :prefix
     case
       when wind.calm?
-        f.block :calm
+        block :calm
       when wind.variable?
-        add_variable_wind_blocks_to_en f
+        add_variable_wind_blocks_to_en
       when wind.direction
-        f.text wind.direction
-        f.block :degrees
+        text wind.direction
+        block :degrees
     end
-    add_wind_speed_blocks_to_en f unless wind.calm?
+    add_wind_speed_blocks_to_en unless wind.calm?
   end
 
-  format :ru do |f|
-    f.block :prefix
+  format :ru do
+    block :prefix
     case
       when wind.calm?
-        f.block :calm
+        block :calm
       when wind.variable?
-        add_variable_wind_blocks_to f
+        add_variable_wind_blocks
       when wind.direction
-        f.block wind.direction
-        f.block :degrees
+        block wind.direction
+        block :degrees
     end
-    add_wind_speed_blocks_to f unless wind.calm?
+    add_wind_speed_blocks unless wind.calm?
   end
 
   def wind
-    metar.wind.first
+    source.first
   end
 
-  def add_wind_speed_blocks_to(f)
+  def add_wind_speed_blocks
     if wind.gusting?
-      f.block wind.gusts.min
-      f.block :gusting_to
-      f.block wind.gusts.max
+      block wind.gusts.min
+      block :gusting_to
+      block wind.gusts.max
     else
-      f.block wind.speed
+      block wind.speed
     end
   end
 
-  def add_wind_speed_blocks_to_en(f)
+  def add_wind_speed_blocks_to_en
     if wind.gusting?
-      f.text wind.gusts.min
-      f.block :gusting_to
-      f.text wind.gusts.max
+      text wind.gusts.min
+      block :gusting_to
+      text wind.gusts.max
     else
-      f.text wind.speed
+      text wind.speed
     end
-    f.block :mps
+    block :mps
   end
 
-  def add_variable_wind_blocks_to(f)
-    f.block :variable
+  def add_variable_wind_blocks
+    block :variable
     if wind.variable_from
-      f.block :variable_from
-      f.block wind.variable_from
+      block :variable_from
+      block wind.variable_from
     end
 
     if wind.variable_to
-      f.block :variable_to
-      f.block wind.variable_to
-      f.block :degrees
+      block :variable_to
+      block wind.variable_to
+      block :degrees
     end
   end
 
-  def add_variable_wind_blocks_to_en(f)
-    f.block :variable
+  def add_variable_wind_blocks_to_en
+    block :variable
     if wind.variable_from
-      f.block :variable_from
-      f.text wind.variable_from
+      block :variable_from
+      text wind.variable_from
     end
 
     if wind.variable_to
-      f.block :variable_to
-      f.text wind.variable_to
-      f.block :degrees
+      block :variable_to
+      text wind.variable_to
+      block :degrees
     end
   end
 

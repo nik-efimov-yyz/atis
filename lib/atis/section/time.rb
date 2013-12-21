@@ -2,31 +2,31 @@ class ATIS::Section::Time < ATIS::Section::Base
 
   uses :metar, group: :time
 
-  format :en do |f|
-    f.text time.time
+  format :en do
+    text time.time
   end
 
-  format :ru do |f|
+  format :ru do
     tens_hours, hours, tens_minutes, minutes = time.time.to_s.split('')
     case
       when tens_hours.to_i != 0
-        f.block (tens_hours + hours)
+        block (tens_hours + hours)
         case
           when tens_minutes.to_i != 0
-            f.block (tens_minutes + minutes)
+            block (tens_minutes + minutes)
           else
-            f.block tens_minutes
-            f.block minutes
+            block tens_minutes
+            block minutes
         end
       else
-        f.block tens_hours
-        f.block hours
+        block tens_hours
+        block hours
         case
           when tens_minutes.to_i != 0
-            f.block (tens_minutes + minutes)
+            block (tens_minutes + minutes)
           else
-            f.block tens_minutes
-            f.block minutes
+            block tens_minutes
+            block minutes
         end
     end
   end

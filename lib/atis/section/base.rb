@@ -2,16 +2,20 @@ class ATIS::Section::Base
 
   attr_accessor :message
 
-  def initialize(message)
-    @message = message
+  def initialize(message, options = {})
+    @message, @options = message, options
     @blocks = []
   end
 
   class << self
 
-    def format(language, &block)
+    def format(languages, &block)
       @formats ||= {}
-      @formats[language] = block
+      languages = [languages] unless languages.is_a?(Array)
+      languages.each do |language|
+        @formats[language] = block
+      end
+
     end
 
     def formats
@@ -56,7 +60,7 @@ class ATIS::Section::Base
   def render_in(language = :en, options = {})
     raise "format not specified for #{language} in #{self.class}" unless formats[language].present?
 
-    return "" if source_empty?
+    return if source_empty?
 
     # Calling the appropriate format to load up blocks
     instance_exec self, options, &formats[language]
@@ -65,7 +69,7 @@ class ATIS::Section::Base
 
   def source
     if self.class.source.present?
-      self.class.metar_group.present? ? metar.send(self.class.metar_group) : message.send(self.class.source)
+      self.class.metar_group.present? ? metar.send(self.class.metar_group, @options) : message.send(self.class.source)
     end
   end
 

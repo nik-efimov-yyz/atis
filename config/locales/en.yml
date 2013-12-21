@@ -227,6 +227,11 @@ en:
     moderate: "moderate"
     severe: "severe"
 
+  trend:
+    tempo: "temporarily"
+    becmg: "becoming"
+    nosig: "no significant change"
+
   units:
     meters: "m"
 

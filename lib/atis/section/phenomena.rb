@@ -2,16 +2,26 @@ class ATIS::Section::Phenomena < ATIS::Section::Base
 
   uses :metar, group: :phenomena
 
-  format :en do |f|
-    "English Phenomena"
+  format :en do
+    source.each do |p|
+      block p.intensity if p.intensity.present?
+      block :vicinity if p.vicinity?
+
+      order = [:descriptor, :phenomena]
+      order.reverse! if p.descriptor == "SH"
+
+      order.each do |o|
+        block p.send(o).downcase.to_sym if p.send(o).present?
+      end
+    end
   end
 
-  format :ru do |f|
+  format :ru do
 
-    metar.phenomena.each do |p|
-      f.block :vc if p.vicinity?
+    source.each do |p|
+      block :vc if p.vicinity?
 
-      russian_phenomena_blocks_for p, f
+      add_russian_phenomena_blocks_for p
     end
 
   end
@@ -19,7 +29,7 @@ class ATIS::Section::Phenomena < ATIS::Section::Base
 
   private
 
-  def russian_phenomena_blocks_for(atis_node, f)
+  def add_russian_phenomena_blocks_for(atis_node)
 
     overrides = {
         BL: %w(SN DU SA),
@@ -46,9 +56,9 @@ class ATIS::Section::Phenomena < ATIS::Section::Base
     descriptor ||= atis_node.descriptor.try(:downcase)
     phenomena ||= atis_node.phenomena.downcase
 
-    f.block "#{intensity}.#{gender}".to_sym if intensity.present? and intensity != :override
-    f.block "#{descriptor}.#{gender}".to_sym if descriptor.present? and descriptor != :override
-    f.block phenomena.to_sym
+    block "#{intensity}.#{gender}".to_sym if intensity.present? and intensity != :override
+    block "#{descriptor}.#{gender}".to_sym if descriptor.present? and descriptor != :override
+    block phenomena.to_sym
   end
 
 

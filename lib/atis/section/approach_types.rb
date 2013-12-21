@@ -1,17 +1,17 @@
 class ATIS::Section::ApproachTypes < ATIS::Section::Base
 
-  format :en do |f|
-    f.block :expect
+  format :en do
+    block :expect
     message.approach_types.each do |t|
-      f.block t.downcase.to_sym
+      block t.downcase.to_sym
     end
-    f.block :approach
+    block :approach
   end
 
-  format :ru do |f|
+  format :ru do
     message.approach_types.each do |t|
-      f.block :prefix
-      f.block t.downcase.to_sym
+      block :prefix
+      block t.downcase.to_sym
     end
   end
 

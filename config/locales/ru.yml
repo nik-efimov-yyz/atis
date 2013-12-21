@@ -210,6 +210,11 @@ ru:
     prefix: "температура"
     dew_point: "точка росы"
 
+  trend:
+    tempo: "временами"
+    becmg: "изменения"
+    nosig: "без существенных изменений"
+
   transitionlevel:
     prefix: "эшелон перехода"
 

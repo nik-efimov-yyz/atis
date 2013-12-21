@@ -11,28 +11,30 @@ module METAR::Report::Extensions
       @groups << name
       options.reverse_merge!(in: :metar)
 
-      options[:in] = [options[:in]] unless options[:in].is_a?(Array)
+      define_method(name) do |args = {}|
 
-      define_method(name) do
+        sources = args[:from] || options[:in]
+        sources = [sources] unless sources.is_a?(Array)
 
-        subjects = options[:in].map do |s|
+        sources = sources.map do |s|
           src = send("#{s}".to_sym)
           src && src.clone
         end
+
         nodes = []
 
-        subjects.compact.each do |s|
+        sources.compact.each do |source|
           loop do
-            match = s.match(options[:matches])
+            match = source.match(options[:matches])
             break if match.nil?
             nodes << "METAR::Node::#{name.to_s.camelcase}".constantize.new(match)
-            s.gsub!(match[0].strip, "")
+            source.gsub!(match[0].strip, "")
           end
         end
 
-
-
         nodes
+
+        #metar.visibility from: :trend
       end
     end
 
