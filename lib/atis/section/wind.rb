@@ -2,8 +2,18 @@ class ATIS::Section::Wind < ATIS::Section::Base
 
   uses :metar, group: :wind
 
-  format :en do
-    "English cloud stuff"
+  format :en do |f|
+    f.block :prefix
+    case
+      when wind.calm?
+        f.block :calm
+      when wind.variable?
+        add_variable_wind_blocks_to_en f
+      when wind.direction
+        f.text wind.direction
+        f.block :degrees
+    end
+    add_wind_speed_blocks_to_en f unless wind.calm?
   end
 
   format :ru do |f|
@@ -34,6 +44,17 @@ class ATIS::Section::Wind < ATIS::Section::Base
     end
   end
 
+  def add_wind_speed_blocks_to_en(f)
+    if wind.gusting?
+      f.text wind.gusts.min
+      f.block :gusting_to
+      f.text wind.gusts.max
+    else
+      f.text wind.speed
+    end
+    f.block :mps
+  end
+
   def add_variable_wind_blocks_to(f)
     f.block :variable
     if wind.variable_from
@@ -44,6 +65,20 @@ class ATIS::Section::Wind < ATIS::Section::Base
     if wind.variable_to
       f.block :variable_to
       f.block wind.variable_to
+      f.block :degrees
+    end
+  end
+
+  def add_variable_wind_blocks_to_en(f)
+    f.block :variable
+    if wind.variable_from
+      f.block :variable_from
+      f.text wind.variable_from
+    end
+
+    if wind.variable_to
+      f.block :variable_to
+      f.text wind.variable_to
       f.block :degrees
     end
   end

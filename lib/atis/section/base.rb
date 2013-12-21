@@ -73,4 +73,17 @@ class ATIS::Section::Base
     self.class.source.present? && !source.present?
   end
 
+  def human_number_blocks_for(number)
+    number = number.to_i
+    if number >= 1000
+      block (number/1000).to_s.to_sym, scope: :numbers
+      block :thousand, scope: :numbers
+    end
+    if number >= 100 and number % 1000 > 0
+      block ((number % 1000) / 100).to_s.to_sym, scope: :numbers
+      block :hundred, scope: :numbers
+    end
+    block (number % 100).to_s.to_sym, scope: :numbers if number % 100 > 0
+  end
+
 end

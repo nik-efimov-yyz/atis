@@ -2,6 +2,30 @@ class ATIS::Section::Pressure < ATIS::Section::Base
 
   uses :metar, group: :pressure
 
+  format :en do |f|
+    message.report_pressure_in.each do |pressure_type|
+      if message.report_pressure_in == ["QFE"]
+        f.block :pressure
+      else
+        f.block pressure_type.downcase.to_sym
+      end
+
+      case pressure_type.downcase.to_sym
+        when :qfe
+          f.text mm_from_hpa(qfe_from(pressure.pressure))
+          f.block :mm
+          f.block :or
+          f.text qfe_from(pressure.pressure)
+        when :qnh
+          f.text pressure.pressure
+          f.block :or
+          f.text mm_from_hpa(pressure.pressure)
+          f.block :mm
+      end
+
+    end
+  end
+
   format :ru do |f|
     message.report_pressure_in.each do |pressure_type|
       if message.report_pressure_in == ["QFE"]

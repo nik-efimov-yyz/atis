@@ -3,6 +3,7 @@ class ATIS::Message
   DEFAULT_MESSAGE_SECTIONS = [
       :aerodrome,
       :message_index,
+      :time,
       :approach_types,
       :arrival_runways,
       :departure_runways,
@@ -12,14 +13,15 @@ class ATIS::Message
       :cavok,
       :visibility,
       :rvr,
-      :phenomena,
+      #:phenomena,
       :sky_condition,
       :obstructions,
       :temperature,
       :pressure,
-      :windshear,
+      #:windshear,
       :icing,
-      :turbulence
+      :turbulence,
+      :message_end
   ]
 
   attr_accessor :sections, :metar, :options
