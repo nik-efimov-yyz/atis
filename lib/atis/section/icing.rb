@@ -4,14 +4,15 @@ class ATIS::Section::Icing < ATIS::Section::Base
 
   format :en do |f|
     f.block :prefix, scope: :warnings
-    f.block :in_cloud if icing.in_cloud
     f.block icing.intensity
     f.block :prefix
+    f.block :in_cloud if icing.in_cloud
     if icing.height.max > 0
       f.block :from
-      f.block icing.height.min
+      human_number_blocks_for icing.height.min
       f.block :to
-      f.block icing.height.max
+      human_number_blocks_for icing.height.max
+      f.block :meters, scope: :units
     end
   end
 

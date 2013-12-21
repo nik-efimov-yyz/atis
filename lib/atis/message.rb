@@ -15,13 +15,13 @@ class ATIS::Message
       :rvr,
       #:phenomena,
       :sky_condition,
-      #:obstructions,
-      #:temperature,
-      #:pressure,
+      :obstructions,
+      :temperature,
+      :pressure,
       #:windshear,
-      #:icing,
-      #:turbulence,
-      #:message_end
+      :icing,
+      :turbulence,
+      :message_end
   ]
 
   attr_accessor :sections, :metar, :options

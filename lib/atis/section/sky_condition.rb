@@ -42,10 +42,10 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
           f.block :vertical_visibility
 
           if index == 0 and metar.qbb.present?
-            f.block metar.qbb.first.height
+            human_number_blocks_for metar.qbb.first.height
             f.block :meters, scope: :units
           else
-            f.block metric_cloud_height_from(sky.height)
+            human_number_blocks_for metric_cloud_height_from(sky.height)
             f.block :meters, scope: :units
           end
       end

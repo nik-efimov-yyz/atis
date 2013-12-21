@@ -29,8 +29,21 @@ en:
   departurerunways:
     prefix: "departure"
 
+  end:
+    end_message: "acknowledge"
+    information: "information"
+
   extrainformation:
     birds: "flocks of birds possible in aerodrome area"
+
+  icing:
+      prefix: "icing"
+      from: "between"
+      to: "and"
+      in_cloud: "in clouds"
+      light: "light"
+      moderate: "moderate"
+      severe: "severe"
 
   messageindex:
     atis: "ATIS"
@@ -204,6 +217,16 @@ en:
   transitionlevel:
     prefix: "transition level"
 
+  turbulence:
+    prefix: "turbulence"
+    from: "between"
+    to: "and"
+    in_cloud: "in clouds"
+    in_out_cloud: "in and out of clouds"
+    light: "light"
+    moderate: "moderate"
+    severe: "severe"
+
   units:
     meters: "m"
 
@@ -212,6 +235,9 @@ en:
     unlimited: "greater than 10 кm"
     kilometers: "km"
     less_than_50: "less than fifty"
+
+  warnings:
+    prefix: "caution"
 
   wind:
     prefix: "wind"
@@ -224,5 +250,5 @@ en:
     mps: "mps"
 
   windshear:
-    prefix: "windshear"
-    runway: "runway"
+    windshear: "windshear"
+    all_runways: "in aerodrome area"
