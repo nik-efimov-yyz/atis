@@ -2,6 +2,9 @@ class ATIS::Section::Phenomena < ATIS::Section::Base
 
   uses :metar, group: :phenomena
 
+  format :en do |f|
+    "English Phenomena"
+  end
 
   format :ru do |f|
 

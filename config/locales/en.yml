@@ -2,22 +2,32 @@ en:
 
   approachtypes:
     approach: "approach"
+    expect: "expect"
     ils: "ILS"
     2ndb: "2NDB"
     vis: "visual"
+    gnss: "GNSS"
+    loc: "LOC"
+    ndb: "NDB"
+    rev_ndb: "NDB"
+
   arrivalrunways:
     prefix: "runway"
     l: "left"
     r: "right"
     c: "central"
+
   cavok:
     cavok: "CAVOK"
+
+  common_words:
+    to: "to"
+    from: "from"
+    or: "or"
+    and: "and"
+
   departurerunways:
-    prefix: "Departure"
-    l: "left"
-    r: "right"
-    c: "central"
-    runway: "runway"
+    prefix: "departure"
 
   extrainformation:
     birds: "flocks of birds possible in aerodrome area"
@@ -28,6 +38,28 @@ en:
 
   numbers:
     minus: "-"
+    "1": "one"
+    "2": "two"
+    "3": "three"
+    "4": "four"
+    "5": "five"
+    "6": "six"
+    "7": "seven"
+    "8": "eight"
+    "9": "nine"
+    "10": "ten"
+    "20": "twenty"
+    "25": "twenty five"
+    "30": "thirty"
+    "40": "forty"
+    "50": "fifty"
+    "60": "sixty"
+    "70": "seventy"
+    "75": "seventy five"
+    "80": "eighty"
+    "90": "ninety"
+    thousand: "thousand"
+    hundred: "hundred"
 
   obstructions:
     mast: "masts"
@@ -35,7 +67,6 @@ en:
     obscured: "obscured"
 
   phenomena:
-
     vc: "vicinity"
     heavy: "heavy"
     light: "light"
@@ -116,9 +147,15 @@ en:
     or: "or"
     mm: "mm"
 
+  runway:
+    runway: "runway"
+    l: "L"
+    r: "R"
+    c: "C"
+
   runwaycondition:
     compacted_snow: "compacted snow"
-    covered_in: "covered by"
+    covered_in: "covered with"
     damp: "damp"
     dry_snow: "dry snow"
     ice: "ice"
@@ -127,21 +164,18 @@ en:
     rough_ice: "rough ice"
     slush: "slush"
     patches_of: "patches"
-    to: "to"
     water: "water"
     wet: "wet"
     wet_snow: "wet snow"
     braking_action: "braking action"
     poor: "poor"
+    medium_to_poor: "medium to poor"
+    medium: "medium"
+    medium_to_good: "medium to good"
     good: "good"
-    mediocre: "mediocre"
-    to: "to"
 
   rvr:
-    prefix: "RVR runway"
-    l: "left"
-    r: "right"
-    c: "central"
+    prefix: "RVR"
     peak: "greater than"
     minimum: "lower than"
     from: "from"
@@ -150,6 +184,7 @@ en:
     upward: "increasing"
     downward: "decreasing"
     no_change: "no change"
+
   skycondition:
     clear: "clear"
     no_significant_cloud: "no significant clouds"
@@ -169,10 +204,15 @@ en:
   transitionlevel:
     prefix: "transition level"
 
+  units:
+    meters: "m"
+
   visibility:
     prefix: "visibility"
     unlimited: "greater than 10 кm"
     kilometers: "km"
+    less_than_50: "less than fifty"
+
   wind:
     prefix: "wind"
     calm: "calm"
@@ -181,6 +221,7 @@ en:
     variable_to: "and"
     degrees: "degrees"
     gusting_to: "gusting to"
+    mps: "mps"
 
   windshear:
     prefix: "windshear"

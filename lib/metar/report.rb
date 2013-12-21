@@ -17,9 +17,9 @@ class METAR::Report
   end
 
   group :aerodrome, matches: /^[A-Z]{4}\s/
-  group :time, matches: /\s(\d{2})(\d{2})(\d{2})Z\s/
+  group :time, matches: /\s(\d{2})(\d{4})Z\s/
   group :wind, matches: /\s(VRB|\d{3})(\d{2}|\d{2}G\d{2})(KT|MPS)( (\d{3})V(\d{3}))?\s/
-  group :visibility, matches: /\s(\d{1,4})(SM)?\s/
+  group :visibility, matches: /\sP?(\d{1,4})(SM)?\s/
   group :rvr, matches: /\sR(\d{2}[RLC]?)\/(M|P)?(\d{4})(V?)(P?)(\d{4}?)(U|D|N)?\s/
   group :phenomena, matches: /\s(\+|-|VC)?(#{METAR::Node::Phenomena::DESCRIPTORS.join("|")})?(#{METAR::Node::Phenomena::PHENOMENA.join("|")})\s/
   group :sky_condition, matches: /\s(SKC|NSC|(FEW|SCT|BKN|OVC|VV)(\d{3})(TCU|CB)?)\s/

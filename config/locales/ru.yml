@@ -5,12 +5,20 @@ ru:
     ils: "ИЛС"
     2ndb: "ОСП"
     vis: "визуальный"
+    gnss: "спутниковая навигационная система"
+    loc: "КРМ"
+    ndb: "ОПРС"
+    rev_ndb: "ОПРС обратного старта"
+
 
   cavok:
     cavok: "условия хорошие"
 
   departurerunways:
     prefix: "на вылет"
+
+  end:
+    end_message: "сообщите получение"
 
   extrainformation:
     birds: "в районе аэродрома возможен перелет птиц"
@@ -30,7 +38,7 @@ ru:
     information: "информация"
 
   numbers:
-    minus: "минус"
+    minus: " -"
 
   obstructions:
     mast: "мачты"
@@ -153,9 +161,9 @@ ru:
     pressure: "давление"
 
   runway:
-    l: "левая"
-    r: "правая"
-    c: "центральная"
+    l: "Л"
+    r: "П"
+    c: "Ц"
     runway: "ВПП"
 
   runwaycondition:
@@ -176,7 +184,7 @@ ru:
     wet_snow: "мокрым снегом"
 
   rvr:
-    prefix: "дальность видимости на ВПП"
+    prefix: "дальность видимости на"
     peak: "более"
     minimum: "менее"
     from: "от"
@@ -220,8 +228,11 @@ ru:
     prefix: "видимость"
     unlimited: "более 10 километров"
     kilometers: "километров"
+    less_than_50: "менее пятьдесят"
+
   warnings:
     prefix: "предупреждение"
+
   wind:
     prefix: "ветер у земли"
     calm: "тихо"
