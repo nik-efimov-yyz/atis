@@ -2,7 +2,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
   uses :metar, group: :runway_condition
 
-  format :en do |f, options|
+  format :en do |options|
 
     source.each do |rwy|
 
@@ -42,7 +42,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
   end
 
-  format :ru do |f, options|
+  format :ru do |options|
 
     source.each do |rwy|
 

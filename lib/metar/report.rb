@@ -16,7 +16,7 @@ class METAR::Report
   end
 
   group :aerodrome, matches: /^[A-Z]{4}\s/
-  group :time, matches: /\s(\d{2})(\d{4})Z\s/
+  group :time, matches: /\s(\d{2})(\d{2})(\d{2})Z\s/
   group :wind, matches: /\s(VRB|\d{3})(\d{2}|\d{2}G\d{2})(KT|MPS)( (\d{3})V(\d{3}))?\s/
   group :visibility, matches: /\sP?(\d{1,4})(SM)?\s/, in: [:metar, :trend]
   group :rvr, matches: /\sR(\d{2}[RLC]?)\/(M|P)?(\d{4})(V?)(P?)(\d{4}?)(U|D|N)?\s/
@@ -28,7 +28,7 @@ class METAR::Report
   group :runway_condition, matches: /\sR?(\d{2}(?:L|R|C)?)\/?(\d{1}|\/{1}|C)(\d{1}|\/{1}|L)(\d{2}|\/{2}|RD)(\d{2}|\/{2})\s/
   group :cavok, matches: /\s(CAVOK)\s/
   group :qbb, matches: /\sQBB(\d{3})\s/, in: [:metar, :trend]
-  group :windshear, matches: /\sWS (ALL RWY|RWY (\d{2}(?:L|R|C)))\s/
+  group :windshear, matches: /\sWS (ALL RWY|RWY(\d{2}(?:L|R|C)?))\s/
   group :icing, matches: /\s(MOD|FBL|SEV)\s(ICE)\s(?:(INC)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
   group :turbulence, matches: /\s(MOD|FBL|SEV)\s(TURB)\s(?:(INC|IAO)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
 
