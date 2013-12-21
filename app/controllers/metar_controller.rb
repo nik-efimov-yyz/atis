@@ -2,7 +2,7 @@ class MetarController < ApplicationController
 
 
   def decode
-    #params[:icao] = "ULLI 101727Z 20004MPS 170V230 0350 R05L/P2000N R16/0800V1500D R05R/P2000U 9999 -SN FEW008 BKN041 OVC066 M07/M07 Q1028 28////// 78290050 WS RWY05L"
+    #params[:icao] = "ULLI 101727Z 20004MPS 170V230 0350 R05L/P2000N R16/0800V1500D R05R/P2000U 9999 -SN FEW008 BKN041 OVC066 M07/M07 Q1028 28////// 78290050 WS RWY05L TEMPO OVC010 QBB200"
     @message = ATIS::Message.new(params[:icao], metar_options_from_params)
 
     respond_to do |format|

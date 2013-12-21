@@ -36,10 +36,10 @@ class ATIS::Message
     @options = options
   end
 
-  def render_in(language = :en)
+  def render_in(language = :en, options = {})
     self.class.sections.inject([]) do |array, section_hash|
       section = "ATIS::Section::#{section_hash[:name].to_s.camelize}".constantize.new(self, section_hash[:options])
-      array << section.render_in(language)
+      array << section.render_in(language, options)
     end.compact.join(" ")
   end
 

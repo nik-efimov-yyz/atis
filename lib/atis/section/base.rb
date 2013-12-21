@@ -57,13 +57,15 @@ class ATIS::Section::Base
     @message.metar
   end
 
-  def render_in(language = :en)
+  def render_in(language = :en, options = {})
     raise "format not specified for #{language} in #{self.class}" unless formats[language].present?
 
     return if source_empty?
 
+    options.reverse_merge! @options
+
     # Calling the appropriate format to load up blocks
-    instance_exec @options, &formats[language]
+    instance_exec options, &formats[language]
     @blocks.map { |b| b.render locale: language, scope: self.class.name.demodulize.downcase.to_sym }.join(" ")
   end
 
