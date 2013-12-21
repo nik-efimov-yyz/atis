@@ -5,7 +5,15 @@ class METAR::Node::Time < METAR::Node::Base
   end
 
   property :time do
-    match[2].to_s
+    [hours, minutes].join
+  end
+
+  property :hours do
+    sprintf("%02d", match[2].to_i)
+  end
+
+  property :minutes do
+    sprintf("%02d", match[3].to_i)
   end
 
   property :time_zone do

@@ -2,7 +2,7 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
 
   uses :metar, group: :sky_condition
 
-  format :en do
+  format :en do |options|
 
     sky_cover_below_5000_reported, sky_clear_reported = false
 
@@ -24,7 +24,7 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
             block sky.cover.downcase.to_sym
             block sky.cloud_type.downcase.to_sym if sky.cloud_type.present?
 
-            if index == 0 and metar.qbb.present?
+            if index == 0 and metar.qbb.present? and options[:from] != :trend
               human_number_blocks_for metar.qbb.first.height
               block :meters, scope: :units
             else
@@ -43,7 +43,7 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
         when sky.vertical_visibility?
           block :vertical_visibility
 
-          if index == 0 and metar.qbb.present?
+          if index == 0 and metar.qbb.present? and options[:from] != :trend
             human_number_blocks_for metar.qbb.first.height
             block :meters, scope: :units
           else
@@ -56,7 +56,7 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
   end
 
 
-  format :ru do
+  format :ru do |options|
 
     sky_cover_below_5000_reported, sky_clear_reported = false
 
@@ -78,7 +78,7 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
             block sky.cover.downcase.to_sym
             block sky.cloud_type.downcase.to_sym if sky.cloud_type.present?
 
-            if index == 0 and metar.qbb.present?
+            if index == 0 and metar.qbb.present? and options[:from] != :trend
               block metar.qbb.first.height
             else
               block metric_cloud_height_from(sky.height)
@@ -96,7 +96,7 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
         when sky.vertical_visibility?
           block :vertical_visibility
 
-          if index == 0 and metar.qbb.present?
+          if index == 0 and metar.qbb.present? and options[:from] != :trend
             block metar.qbb.first.height
           else
             block metric_cloud_height_from(sky.height)

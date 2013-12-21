@@ -9,7 +9,11 @@ class ATIS::Section::Windshear < ATIS::Section::Base
         block :windshear
         block :all_runways
       else
-        common_windshear_blocks
+        runway_number, side = windshear.runway.split(/(L|R|C)/)
+        block :windshear
+        block :runway, scope: :runway
+        text runway_number
+        block side.downcase.to_sym, scope: :runway if side.present?
     end
   end
 
@@ -20,16 +24,12 @@ class ATIS::Section::Windshear < ATIS::Section::Base
         block :all_runways
         block :windshear
       else
-        common_windshear_blocks
+        runway_number, side = windshear.runway.split(/(L|R|C)/)
+        block :windshear
+        block :runway, scope: :runway
+        block runway_number
+        block side.downcase.to_sym, scope: :runway if side.present?
     end
-  end
-
-  def common_windshear_blocks
-    runway_number, side = windshear.runway.split(/(L|R|C)/)
-    block :windshear
-    block :runway, scope: :runway
-    block runway_number
-    block side.downcase.to_sym, scope: :runway if side.present?
   end
 
   def windshear

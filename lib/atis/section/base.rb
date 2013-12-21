@@ -24,15 +24,15 @@ class ATIS::Section::Base
 
     def uses(name, options = {})
       @source = name
-      @metar_group = options[:group]
+      @source_options = options
     end
 
     def source
       @source
     end
 
-    def metar_group
-      @metar_group
+    def source_options
+      @source_options
     end
 
   end
@@ -57,19 +57,21 @@ class ATIS::Section::Base
     @message.metar
   end
 
-  def render_in(language = :en, options = {})
+  def render_in(language = :en)
     raise "format not specified for #{language} in #{self.class}" unless formats[language].present?
 
     return if source_empty?
 
     # Calling the appropriate format to load up blocks
-    instance_exec self, options, &formats[language]
+    instance_exec @options, &formats[language]
     @blocks.map { |b| b.render locale: language, scope: self.class.name.demodulize.downcase.to_sym }.join(" ")
   end
 
   def source
     if self.class.source.present?
-      self.class.metar_group.present? ? metar.send(self.class.metar_group, @options) : message.send(self.class.source)
+      src = self.class.source_options[:group].present? ? metar.send(self.class.source_options[:group], @options) : message.send(self.class.source)
+      src = src.send(:first) if self.class.source_options[:first]
+      src
     end
   end
 
@@ -88,6 +90,15 @@ class ATIS::Section::Base
       block :hundred, scope: :numbers
     end
     block (number % 100).to_s.to_sym, scope: :numbers if number % 100 > 0
+  end
+
+  def spaced_number_blocks_for(number)
+    number = number.to_s
+    if number[-2] == "0"
+      number.split("").each { |c| block " " + c }
+    else
+      block number
+    end
   end
 
 end

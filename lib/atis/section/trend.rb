@@ -5,7 +5,7 @@ class ATIS::Section::Trend < ATIS::Section::Base
   end
 
   def source_empty?
-    metar.trend.empty?
+    !metar.trend.present?
   end
 
 end

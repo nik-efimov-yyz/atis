@@ -1,38 +1,15 @@
 class ATIS::Section::Time < ATIS::Section::Base
 
-  uses :metar, group: :time
+  uses :metar, group: :time, first: true
 
   format :en do
-    text time.time
+    text source.time
   end
 
   format :ru do
-    tens_hours, hours, tens_minutes, minutes = time.time.to_s.split('')
-    case
-      when tens_hours.to_i != 0
-        block (tens_hours + hours)
-        case
-          when tens_minutes.to_i != 0
-            block (tens_minutes + minutes)
-          else
-            block tens_minutes
-            block minutes
-        end
-      else
-        block tens_hours
-        block hours
-        case
-          when tens_minutes.to_i != 0
-            block (tens_minutes + minutes)
-          else
-            block tens_minutes
-            block minutes
-        end
-    end
+    spaced_number_blocks_for source.hours
+    spaced_number_blocks_for source.minutes
   end
 
-  def time
-    metar.time.first
-  end
 
 end
