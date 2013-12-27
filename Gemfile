@@ -23,7 +23,9 @@ gem 'jbuilder', '~> 1.2'
 
 gem "haml"
 
-gem 'rails_12factor', group: :productionh
+gem "pg"
+
+gem 'rails_12factor', group: :production
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -32,11 +34,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem "sqlite3"
-end
-
-group :production do
   gem "mysql2"
+  gem "sqlite3"
 end
 
 # Use ActiveModel has_secure_password
