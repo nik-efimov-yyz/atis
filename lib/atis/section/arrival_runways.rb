@@ -27,7 +27,7 @@ class ATIS::Section::ArrivalRunways < ATIS::Section::RunwayInformation
       block :runway, scope: :runway
 
       runway_number, side = rwy.split(/(L|R|C)/)
-      block runway_number
+      rwy_number_conversion runway_number
       block side.downcase.to_sym, scope: :runway if side.present?
 
       if rwy_cond = ru_runway_condition_for(rwy)

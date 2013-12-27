@@ -1,10 +1,6 @@
 class ATIS::Section::Aerodrome < ATIS::Section::Base
 
-  format :en do
-    block airport.icao
-  end
-
-  format :ru do
+  format [:en, :ru] do
     block airport.icao
   end
 

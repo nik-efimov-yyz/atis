@@ -31,6 +31,7 @@ class METAR::Report
   group :windshear, matches: /\sWS (ALL RWY|RWY(\d{2}(?:L|R|C)?))\s/
   group :icing, matches: /\s(MOD|FBL|SEV)\s(ICE)\s(?:(INC)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
   group :turbulence, matches: /\s(MOD|FBL|SEV)\s(TURB)\s(?:(INC|IAO)(?:\((.*)\))?\s?)?(?:(\d{1,4})M?-(\d{1,4})M?)?\s/, in: [:metar, :trend]
+  group :friction, matches:/\sSC0(\d{1,2})\s/, in: [:metar, :trend]
 
   def full_report
     [@metar, @trend].compact.join(" ")

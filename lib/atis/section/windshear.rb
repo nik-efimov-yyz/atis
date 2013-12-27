@@ -12,7 +12,7 @@ class ATIS::Section::Windshear < ATIS::Section::Base
         runway_number, side = windshear.runway.split(/(L|R|C)/)
         block :windshear
         block :runway, scope: :runway
-        text runway_number
+        block runway_number
         block side.downcase.to_sym, scope: :runway if side.present?
     end
   end
@@ -27,7 +27,7 @@ class ATIS::Section::Windshear < ATIS::Section::Base
         runway_number, side = windshear.runway.split(/(L|R|C)/)
         block :windshear
         block :runway, scope: :runway
-        block runway_number
+        rwy_number_conversion runway_number
         block side.downcase.to_sym, scope: :runway if side.present?
     end
   end

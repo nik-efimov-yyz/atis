@@ -13,9 +13,9 @@ class ATIS::Section::Visibility < ATIS::Section::Base
         block :meters, scope: :units
       else
         if visibility.visibility.to_i < 5000
-          human_number_blocks_for visibility.visibility
+          block visibility.visibility
         else
-          text (visibility.visibility.to_f * 0.001).to_i
+          block (visibility.visibility.to_f * 0.001).to_i
           block :kilometers
         end
       end
@@ -29,7 +29,7 @@ class ATIS::Section::Visibility < ATIS::Section::Base
       when visibility.less_than_50?
         block :less_than_50
       else
-        add_visibility_range_to_ru
+        add_visibility_range_to
       end
     end
 
@@ -37,15 +37,12 @@ class ATIS::Section::Visibility < ATIS::Section::Base
     source.first
   end
 
-  def add_visibility_range_to_en(f)
 
-  end
-
-  def add_visibility_range_to_ru
+  def add_visibility_range_to
     if visibility.visibility.to_i < 5000
-      block visibility.visibility.to_i
+      number_conversion visibility.visibility.to_i
     else
-      block (visibility.visibility.to_f * 0.001).to_i
+      number_conversion (visibility.visibility.to_f * 0.001).to_i
       block :kilometers
     end
   end

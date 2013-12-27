@@ -20,15 +20,15 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
           break unless sky.height.present?
 
           if sky.height <= 5000 or %w(CB TCU).include?(sky.cloud_type)
-
+            block :prefix
             block sky.cover.downcase.to_sym
             block sky.cloud_type.downcase.to_sym if sky.cloud_type.present?
 
             if index == 0 and metar.qbb.present? and options[:from] != :trend
-              human_number_blocks_for metar.qbb.first.height
+              block metar.qbb.first.height
               block :meters, scope: :units
             else
-              human_number_blocks_for metric_cloud_height_from(sky.height)
+              block metric_cloud_height_from(sky.height)
               block :meters, scope: :units
             end
             sky_cover_below_5000_reported = true
@@ -44,10 +44,10 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
           block :vertical_visibility
 
           if index == 0 and metar.qbb.present? and options[:from] != :trend
-            human_number_blocks_for metar.qbb.first.height
+            block metar.qbb.first.height
             block :meters, scope: :units
           else
-            human_number_blocks_for metric_cloud_height_from(sky.height)
+            block metric_cloud_height_from(sky.height)
             block :meters, scope: :units
           end
       end
@@ -79,9 +79,9 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
             block sky.cloud_type.downcase.to_sym if sky.cloud_type.present?
 
             if index == 0 and metar.qbb.present? and options[:from] != :trend
-              block metar.qbb.first.height
+              number_conversion metar.qbb.first.height
             else
-              block metric_cloud_height_from(sky.height)
+              number_conversion metric_cloud_height_from(sky.height)
             end
 
             sky_cover_below_5000_reported = true
@@ -97,9 +97,9 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
           block :vertical_visibility
 
           if index == 0 and metar.qbb.present? and options[:from] != :trend
-            block metar.qbb.first.height
+            number_conversion metar.qbb.first.height
           else
-            block metric_cloud_height_from(sky.height)
+            number_conversion metric_cloud_height_from(sky.height)
           end
       end
 

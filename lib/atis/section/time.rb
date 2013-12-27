@@ -7,9 +7,16 @@ class ATIS::Section::Time < ATIS::Section::Base
   end
 
   format :ru do
-    spaced_number_blocks_for source.hours
-    spaced_number_blocks_for source.minutes
+    if source.hours.to_i > 9
+      number_conversion source.hours
+    else
+      digit_conversion source.hours
+    end
+    if source.minutes.to_i > 9
+      number_conversion source.minutes
+    else
+      digit_conversion source.minutes
+    end
   end
-
 
 end
