@@ -9,7 +9,7 @@ class ATIS::Section::TransitionLevel < ATIS::Section::Base
 
   format :ru do
     block :prefix
-    text message.transition_level
+    digit_conversion message.transition_level
   end
 
 end

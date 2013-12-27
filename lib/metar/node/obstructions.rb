@@ -5,7 +5,7 @@ class METAR::Node::Obstructions < METAR::Node::Base
       when "MT"
         :mountains
       else
-        :mast
+        :masts
     end
   end
 

@@ -33,15 +33,15 @@ class ATIS::Section::Pressure < ATIS::Section::Base
 
       case pressure_type.downcase.to_sym
         when :qfe
-          text mm_from_hpa(qfe_from(pressure.pressure))
+          digit_conversion mm_from_hpa(qfe_from(pressure.pressure))
           block :or
-          text qfe_from(pressure.pressure)
+          digit_conversion qfe_from(pressure.pressure)
           block :hpa
         when :qnh
-          text pressure.pressure
+          digit_conversion pressure.pressure
           block :hpa
           block :or
-          text mm_from_hpa(pressure.pressure)
+          digit_conversion mm_from_hpa(pressure.pressure)
       end
 
     end

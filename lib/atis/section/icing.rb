@@ -9,9 +9,13 @@ class ATIS::Section::Icing < ATIS::Section::Base
     block :in_cloud if icing.in_cloud
     if icing.height.max > 0
       block :from
-      human_number_blocks_for icing.height.min
+      if icing.height.min == 0
+        block :surface
+      else
+        block icing.height.min
+      end
       block :to
-      human_number_blocks_for icing.height.max
+     block icing.height.max
       block :meters, scope: :units
     end
   end
@@ -24,9 +28,13 @@ class ATIS::Section::Icing < ATIS::Section::Base
     if icing.height.max > 0
       block :layer
       block :from
-      block icing.height.min
+      if icing.height.min == 0
+        block :surface
+      else
+        number_conversion icing.height.min
+      end
       block :to
-      block icing.height.max
+      number_conversion icing.height.max
     end
   end
 

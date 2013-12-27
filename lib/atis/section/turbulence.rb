@@ -10,9 +10,13 @@ class ATIS::Section::Turbulence < ATIS::Section::Base
     block :in_out_cloud if turbulence.in_out_cloud
     if turbulence.height.max > 0
       block :from
-      human_number_blocks_for turbulence.height.min
+      if turbulence.height.min == 0
+        block :surface
+      else
+        block icing.height.min
+      end
       block :to
-      human_number_blocks_for turbulence.height.max
+      block turbulence.height.max
     end
   end
 
@@ -26,9 +30,13 @@ class ATIS::Section::Turbulence < ATIS::Section::Base
     if turbulence.height.max > 0
       block :layer
       block :from
-      block turbulence.height.min
+      if turbulence.height.min == 0
+        block :surface
+      else
+        number_conversion turbulence.height.min
+      end
       block :to
-      block turbulence.height.max
+      number_conversion turbulence.height.max
     end
   end
 

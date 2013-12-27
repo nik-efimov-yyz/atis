@@ -94,12 +94,21 @@ class ATIS::Section::Base
     block (number % 100).to_s.to_sym, scope: :numbers if number % 100 > 0
   end
 
-  def spaced_number_blocks_for(number)
+  def digit_conversion(number)
     number = number.to_s
-    if number[-2] == "0"
-      number.split("").each { |c| block " " + c }
+    number.split("").each { |c| block " " + c }
+  end
+
+  def number_conversion(number)
+    number = number.to_s
+    block " #{number}"
+  end
+
+  def rwy_number_conversion(number)
+    if number.to_i < 10
+      digit_conversion number
     else
-      block number
+      number_conversion number
     end
   end
 
