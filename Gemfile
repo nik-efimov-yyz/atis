@@ -25,6 +25,7 @@ gem "haml"
 
 gem "pg"
 
+gem "rails_serve_static_assets"
 gem 'rails_12factor', group: :production
 
 group :doc do
