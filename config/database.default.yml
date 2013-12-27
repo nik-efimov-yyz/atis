@@ -9,7 +9,8 @@ test:
   pool: 5
   database: db/test.sqlite3
 production:
-  adapter: sqlite3
-  database: vatatis_production
+  adapter: mysql2
+  database: CHANGE
+  username: CHANGE
+  password: CHANGE
   pool: 5
-  database: db/production.sqlite3
