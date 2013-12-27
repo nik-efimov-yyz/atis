@@ -135,7 +135,6 @@ DEPENDENCIES
   pg
   rails (= 4.0.0)
   rails_12factor
-  rails_serve_static_assets
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
