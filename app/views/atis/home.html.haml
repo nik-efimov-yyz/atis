@@ -1,0 +1,84 @@
+.row
+  .col-md-10.col-md-offset-1
+    .page-header
+      %h1.text-center
+        vATIS
+        %small VATSIM ATIS generator
+
+.row
+  .col-md-10.col-md-offset-1
+    #result.text-center{style: ("display: none;" if @token.new_record?)}
+      %p.title Euroscope ATIS Maker URL:
+      %p.url= euroscope_url
+
+.row
+  .col-md-6.col-md-offset-3
+
+    = form_for @token, html: { class: "form-horizontal" } do
+
+      - languages = { "Английский" => "en", "Русский" => "ru" }
+      .form-group
+        %label.col-md-4.control-label Основной Язык
+        .col-md-8
+          = select_tag :pl, options_for_select(languages, @token.params[:pl]), class: "form-control"
+
+      .form-group
+        %label.col-md-4.control-label Дополнительный Язык
+        .col-md-8
+          = select_tag :sl, options_for_select(languages, @token.params[:sl]), include_blank: true, class: "form-control"
+
+      .form-group
+        %label.col-md-4.control-label Типы Захода
+        .col-md-8
+          .checkbox
+            = check_box_tag "apptype[]", "ils", @token.params[:apptype].include?("ils")
+            ИЛС
+          .checkbox
+            = check_box_tag "apptype[]", "2ndb", @token.params[:apptype].include?("2ndb")
+            ОСП
+          .checkbox
+            = check_box_tag "apptype[]", "vis", @token.params[:apptype].include?("vis")
+            Визуальный
+          .checkbox
+            = check_box_tag "apptype[]", "loc", @token.params[:apptype].include?("loc")
+            КРМ
+          .checkbox
+            = check_box_tag "apptype[]", "ndb", @token.params[:apptype].include?("ndb")
+            ОПРС
+          .checkbox
+            = check_box_tag "apptype[]", "rev_ndb", @token.params[:apptype].include?("rev_ndb")
+            ОПРС Обратного Старта
+          .checkbox
+            = check_box_tag "apptype[]", "vordme", @token.params[:apptype].include?("vordme")
+            ВОР ДМЕ
+          .checkbox
+            = check_box_tag "apptype[]", "gnss", @token.params[:apptype].include?("gnss")
+            СНС
+
+      .form-group
+        %label.col-md-4.control-label Дополнительная Информация
+        .col-md-8
+          .checkbox
+            = check_box_tag "extra[]", "birds", @token.params[:extra].try(:include?, "birds")
+            Птицы
+
+      .form-group
+        %label.col-md-4.control-label Эшелон Перехода
+        .col-md-2
+          = text_field_tag :trlvl, @token.params[:trlvl], class: "form-control"
+
+      .form-group
+        %label.col-md-4.control-label Давление в:
+        .col-md-8
+          .checkbox
+            = check_box_tag "pt[]", "qfe", @token.params[:pt].try(:include?, "qfe")
+            QFE
+
+          .checkbox
+            = check_box_tag "pt[]", "qnh", @token.params[:pt].try(:include?, "qnh")
+            QNH
+
+      .form-group
+        .col-md-8.col-md-offset-4
+          - submit_message = @token.new_record? ? "Создать Новый Код" : "Сохранить Изменения"
+          = submit_tag submit_message, class: "btn btn-primary"

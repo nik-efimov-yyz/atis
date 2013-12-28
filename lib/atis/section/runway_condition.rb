@@ -120,7 +120,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
         poor_to_medium: 26..29,
         medium: 30..35,
         medium_to_good: 36..39,
-        good: 40..70
+        good: 40..59
     }
 
     keys[braking_action].to_a.sample
