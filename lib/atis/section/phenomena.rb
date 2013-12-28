@@ -5,7 +5,7 @@ class ATIS::Section::Phenomena < ATIS::Section::Base
   format :en do
     source.each do |p|
       block p.intensity if p.intensity.present?
-      block :vicinity if p.vicinity?
+      block :vc if p.vicinity?
 
       order = [:descriptor, :phenomena]
       order.reverse! if p.descriptor == "SH"

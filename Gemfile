@@ -34,7 +34,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem "mysql2"
   gem "sqlite3"
 end
 

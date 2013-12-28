@@ -10,11 +10,7 @@ class ATIS::Section::Wind < ATIS::Section::Base
       when wind.variable?
         add_variable_wind_blocks_to_en
       when wind.direction
-        if wind.direction.to_i < 100
-          text "0" + wind.direction.to_s
-        else
-          text wind.direction
-        end
+        text sprintf("%03d", wind.direction.to_i)
         block :degrees
     end
     add_wind_speed_blocks_to_en unless wind.calm?
@@ -41,33 +37,33 @@ class ATIS::Section::Wind < ATIS::Section::Base
   def add_wind_speed_blocks_to_ru
     if wind.gusting?
       if wind.gusts.min.to_s.length < 2
-        digit_conversion wind.gusts.min
+        digit_conversion(mps_from wind.gusts.min)
       else
-        number_conversion wind.gusts.min
+        number_conversion(mps_from wind.gusts.min)
       end
       block :gusting_to
       if wind.gusts.max.to_s.length < 2
-        digit_conversion wind.gusts.max
+        digit_conversion(mps_from wind.gusts.max)
       else
-        number_conversion wind.gusts.max
+        number_conversion(mps_from wind.gusts.max)
       end
     else
       if wind.speed.to_s.length < 2
-        digit_conversion wind.speed
+        digit_conversion(mps_from wind.speed)
       else
-        number_conversion wind.speed
+        number_conversion(mps_from wind.speed)
       end
     end
   end
 
   def add_wind_speed_blocks_to_en
     if wind.gusting?
-      text wind.gusts.min
+      text(mps_from wind.gusts.min)
       block :gusting
       block :to
-      text wind.gusts.max
+      text(mps_from wind.gusts.max)
     else
-      text wind.speed
+      text(mps_from wind.speed)
     end
     block :mps
   end
@@ -90,22 +86,23 @@ class ATIS::Section::Wind < ATIS::Section::Base
     block :variable
     if wind.variable_from
       block :variable_from
-      if wind.variable_from.to_i < 100
-        text 0 + wind.variable_from.to_s
-      else
-        text wind.variable_from
-      end
+      text sprintf("%03d", wind.variable_from.to_i)
     end
 
     if wind.variable_to
       block :variable_to
-      if wind.variable_to.to_i < 100
-        text 0 + wind.variable_to.to_s
-      else
-        text wind.variable_to
-      end
+      text sprintf("%03d", wind.variable_to.to_i)
       block :degrees
     end
+  end
+
+  def mps_from(speed)
+    case wind.units
+      when "KT"
+        (speed.to_i * 0.514).round(0)
+      else
+        speed.round(0)
+      end
   end
 
 end
