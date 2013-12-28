@@ -6,7 +6,7 @@ class ATIS::Section::Rvr < ATIS::Section::Base
     block :prefix
     metar.rvr.each do |rvr|
       block :runway, scope: :runway
-      block rvr.runway_number
+      text rvr.runway_number
       block rvr.runway_suffix.downcase.to_sym, scope: :runway if rvr.runway_suffix.present?
 
       if rvr.variable?
