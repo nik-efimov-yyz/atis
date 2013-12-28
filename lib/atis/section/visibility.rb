@@ -14,6 +14,7 @@ class ATIS::Section::Visibility < ATIS::Section::Base
       else
         if visibility.visibility.to_i < 5000
           block visibility.visibility
+          block :meters, scope: :units
         else
           block (visibility.visibility.to_f * 0.001).to_i
           block :kilometers

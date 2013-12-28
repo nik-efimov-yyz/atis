@@ -10,6 +10,7 @@ en:
     loc: "LOC"
     ndb: "NDB"
     rev_ndb: "NDB"
+    vordme: "VORDME"
 
   cavok:
     cavok: "CAVOK"

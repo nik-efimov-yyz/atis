@@ -10,7 +10,11 @@ class ATIS::Section::Wind < ATIS::Section::Base
       when wind.variable?
         add_variable_wind_blocks_to_en
       when wind.direction
-        text wind.direction
+        if wind.direction.to_i < 100
+          text "0" + wind.direction.to_s
+        else
+          text wind.direction
+        end
         block :degrees
     end
     add_wind_speed_blocks_to_en unless wind.calm?
@@ -86,12 +90,20 @@ class ATIS::Section::Wind < ATIS::Section::Base
     block :variable
     if wind.variable_from
       block :variable_from
-      text wind.variable_from
+      if wind.variable_from.to_i < 100
+        text 0 + wind.variable_from.to_s
+      else
+        text wind.variable_from
+      end
     end
 
     if wind.variable_to
       block :variable_to
-      text wind.variable_to
+      if wind.variable_to.to_i < 100
+        text 0 + wind.variable_to.to_s
+      else
+        text wind.variable_to
+      end
       block :degrees
     end
   end
