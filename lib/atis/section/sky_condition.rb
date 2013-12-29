@@ -20,7 +20,7 @@ class ATIS::Section::SkyCondition < ATIS::Section::Base
           break unless sky.height.present?
 
           if sky.height <= 5000 or %w(CB TCU).include?(sky.cloud_type)
-            block :prefix
+            block :prefix if index == 0
             block sky.cover.downcase.to_sym
             block sky.cloud_type.downcase.to_sym if sky.cloud_type.present?
 
