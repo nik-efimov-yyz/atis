@@ -8,6 +8,10 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
       next if options[:if].present? and !instance_exec(rwy, &options[:if])
 
+      if rwy.condition.nil? and (rwy.friction_index.nil? or rwy.braking_action.nil?)
+        break
+      end
+
       unless rwy.condition == :clear_and_dry or rwy.condition.nil?
         block :covered_in unless [:damp, :wet].include? rwy.condition
         block rwy.condition
@@ -54,6 +58,10 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
     source.each do |rwy|
 
       next if options[:if].present? and !instance_exec(rwy, &options[:if])
+
+      if rwy.condition.nil? and (rwy.friction_index.nil? or rwy.braking_action.nil?)
+        break
+      end
 
       unless rwy.condition == :clear_and_dry or rwy.condition.nil?
         block :covered_in unless [:damp, :wet].include? rwy.condition
