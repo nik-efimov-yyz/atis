@@ -25,7 +25,7 @@ class METAR::Report
   group :obstructions, matches: /\s(MAST|MT|OBST|OBST PT) OBSC\s/, in: :trend
   group :temperature, matches: /\s(M?\d{2})\/(M?\d{2})\s/
   group :pressure, matches: /\s(A|Q)(\d{4})\s/
-  group :runway_condition, matches: /\sR?(\d{2}(?:L|R|C)?)\/?(\d{1}|\/{1}|C)(\d{1}|\/{1}|L)(\d{2}|\/{2}|RD)(\d{2}|\/{2})\s/
+  group :runway_condition, matches: /\sR?(\d{2}(?:L|R|C)?)\/?(\d{1}|\/{1}|C)(\d{1}|\/{1}|L)(\d{2}|\/{2}|RD)(\d{2}|\/{2})\s/, in: [:metar, :trend]
   group :cavok, matches: /\s(CAVOK)\s/
   group :qbb, matches: /\sQBB(\d{3})\s/, in: [:metar, :trend]
   group :windshear, matches: /\sWS (ALL RWY|RWY(\d{2}(?:L|R|C)?))\s/
