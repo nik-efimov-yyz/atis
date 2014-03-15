@@ -14,7 +14,7 @@ class ATIS::Section::Pressure < ATIS::Section::Base
           block :or
           text qfe_from(pressure.pressure)
         when :qnh
-          text pressure.pressure
+          text pressure.pressure.to_i
           block :or
           text mm_from_hpa(pressure.pressure)
           block :mm
@@ -38,7 +38,7 @@ class ATIS::Section::Pressure < ATIS::Section::Base
           digit_conversion qfe_from(pressure.pressure)
           block :hpa
         when :qnh
-          digit_conversion pressure.pressure
+          digit_conversion pressure.pressure.to_i
           block :hpa
           block :or
           digit_conversion mm_from_hpa(pressure.pressure)
