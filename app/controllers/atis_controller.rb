@@ -16,6 +16,10 @@ class AtisController < ApplicationController
     end
   end
 
+  def metar
+
+  end
+
   private
 
   def metar_options_from_params

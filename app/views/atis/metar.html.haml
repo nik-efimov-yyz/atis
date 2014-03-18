@@ -1,0 +1,15 @@
+.row
+  .col-md-10.col-md-offset-1
+    .page-header
+      %h1.text-center
+        METAR Analyzer
+
+= form_tag metar_path, method: :post do
+  .row
+    .col-md-10.col-md-offset-1
+      .form-group
+        = text_field_tag :icao, nil, placeholder: "ICAO Airport code or METAR string", class: "form-control"
+
+  .row
+    .col-md-4.col-md-offset-4
+      = submit_tag "Continue", name: nil, class: "btn btn-primary btn-block"
