@@ -2,12 +2,15 @@ class METAR::Node::RunwayCondition < METAR::Node::Base
 
 
   property :runway do
-    if match[1] == "88"
-      :all
-    elsif match[1].to_i > 50
-      "#{match[1].to_i - 50}R"
-    else
-      match[1]
+    case
+      when match[1] == "88"
+        :all
+      when match[1].to_i > 50 && match[1].to_i < 60
+        "0#{match[1].to_i - 50}R"
+      when match[1].to_i >= 60
+        "#{match[1].to_i - 50}R"
+      else
+        match[1]
     end
   end
 

@@ -23,14 +23,14 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
         when :wet
           if rwy.depth.present? and rwy.depth !=0 and rwy.depth != nil
-            block :patches_of
             block :water
+            block :patches
           end
 
         else
 
           if rwy.coverage.present? and rwy.depth != 0 and rwy.depth != nil
-            block :patches_of
+            block :patches
             block :up_to
             if rwy.depth.to_i > 90
               text (rwy.depth.to_i / 10)
@@ -74,14 +74,14 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
         when :wet
           if rwy.depth.present? and rwy.depth != 0
-            block :patches_of
+            block :patches
             block :water
           end
 
         else
 
           if rwy.coverage.present? and rwy.depth != 0 and rwy.depth != nil
-            block :patches_of
+            block :patches
             block :up_to
             if rwy.depth.to_i < 10
               digit_conversion rwy.depth
