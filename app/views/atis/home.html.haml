@@ -54,6 +54,10 @@
           .checkbox
             = check_box_tag "apptype[]", "gnss", @token.params[:apptype].include?("gnss")
             СНС
+          .checkbox
+            = check_box_tag "apptype[]", "par", @token.params[:apptype].include?("par")
+            РСП
+
 
       .form-group
         %label.col-md-4.control-label Дополнительная Информация

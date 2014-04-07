@@ -11,6 +11,7 @@ en:
     ndb: "NDB"
     rev_ndb: "NDB"
     vordme: "VORDME"
+    par: "PAR"
 
   cavok:
     cavok: "CAVOK"
