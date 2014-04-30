@@ -178,7 +178,7 @@ ru:
     minimum: "менее"
     from: "от"
     to: "до"
-    variable: "неустоичивая"
+    variable: "неустойчивая"
     upward: "улучшается"
     downward: "ухудшается"
     no_change: "без изменений"
