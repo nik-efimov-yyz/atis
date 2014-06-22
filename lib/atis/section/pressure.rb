@@ -56,11 +56,11 @@ class ATIS::Section::Pressure < ATIS::Section::Base
     airport = Airport.where(icao: metar.aerodrome.first.icao).first
     return qnh unless airport.present?
 
-    (qnh*(((288-(0.0065*Converter.feet_to_meters(airport.elevation)))/288)**5.2561)).round
+    (qnh*(((288-(0.0065*Converter.feet_to_meters(airport.elevation)))/288)**5.2561)).floor
 
   end
 
   def mm_from_hpa(hpa)
-    (hpa.to_i * 0.750098697).round
+    (hpa.to_i * 0.750098697).floor
   end
 end
