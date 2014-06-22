@@ -20,10 +20,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
       case rwy.condition
 
         when :damp
-          if rwy.braking_action != nil
-            block :braking_action
-          else break
-          end
+
         when :wet
           if rwy.depth.present? and rwy.depth !=0 and rwy.depth != nil
             block :water
@@ -47,9 +44,13 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
       end
 
+      if rwy.braking_action.nil?
+          break
+      end
+
       if rwy.condition != :clear_and_dry || rwy.friction_index.to_f <= 0.6
-        block :braking_action
-        block rwy.braking_action
+          block :braking_action
+          block rwy.braking_action
       end
 
     end
@@ -74,10 +75,6 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
       case rwy.condition
 
         when :damp
-          if rwy.friction_index != nil
-            block :friction_index
-          else break
-          end
 
         when :wet
           if rwy.depth.present? and rwy.depth != 0
@@ -105,23 +102,28 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
           end
       end
 
+      if rwy.friction_index.nil? or rwy.braking_action.nil?
+        break
+      end
+
       if rwy.condition != :clear_and_dry || rwy.friction_index.to_f <= 0.6
 
-        block :friction_index
-        if rwy.friction_index.present?
+          block :friction_index
+          if rwy.friction_index.present?
 
-          rwy.friction_index.to_s.split(".").each do |part|
-            if part.length < 2
-              digit_conversion part
-            else
-              number_conversion part
+            rwy.friction_index.to_s.split(".").each do |part|
+              if part.length < 2
+                digit_conversion part
+              else
+                number_conversion part
+              end
             end
-          end
 
-        elsif rwy.braking_action.present?
-          block " 0"
-          number_conversion guess_friction_from_braking_action(rwy.braking_action)
-        end
+          elsif rwy.braking_action.present?
+            block " 0"
+            number_conversion guess_friction_from_braking_action(rwy.braking_action)
+
+          end
 
       end
 
