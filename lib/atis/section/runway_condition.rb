@@ -21,7 +21,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
         when :damp
         block :covered_in
-        block :braking_action unless braking_action.nil
+        block :braking_action unless braking_action.nil?
 
         when :wet
           if rwy.depth.present? and rwy.depth !=0 and rwy.depth != nil
@@ -74,7 +74,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
 
         when :damp
           block :covered_in
-          block :friction_index unless friction_index.nil
+          block :friction_index unless friction_index.nil?
 
         when :wet
           if rwy.depth.present? and rwy.depth != 0
