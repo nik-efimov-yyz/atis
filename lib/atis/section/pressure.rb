@@ -9,14 +9,14 @@ class ATIS::Section::Pressure < ATIS::Section::Base
 
       case pressure_type.downcase.to_sym
         when :qfe
-          text mm_from_hpa(qfe_from(pressure.pressure))
+          text mm_from_hpa(qfe_from(pressure.pressure)).floor
           block :mm
           block :or
-          text qfe_from(pressure.pressure)
+          text qfe_from(pressure.pressure).floor
         when :qnh
           text pressure.pressure.to_i
           block :or
-          text mm_from_hpa(pressure.pressure)
+          text mm_from_hpa(pressure.pressure).floor
           block :mm
       end
 
@@ -33,15 +33,15 @@ class ATIS::Section::Pressure < ATIS::Section::Base
 
       case pressure_type.downcase.to_sym
         when :qfe
-          digit_conversion mm_from_hpa(qfe_from(pressure.pressure))
+          digit_conversion mm_from_hpa(qfe_from(pressure.pressure)).floor
           block :or
-          digit_conversion qfe_from(pressure.pressure)
+          digit_conversion qfe_from(pressure.pressure).floor
           block :hpa
         when :qnh
           digit_conversion pressure.pressure.to_i
           block :hpa
           block :or
-          digit_conversion mm_from_hpa(pressure.pressure)
+          digit_conversion mm_from_hpa(pressure.pressure).floor
       end
 
     end
@@ -56,11 +56,11 @@ class ATIS::Section::Pressure < ATIS::Section::Base
     airport = Airport.where(icao: metar.aerodrome.first.icao).first
     return qnh unless airport.present?
 
-    (qnh - (Converter.feet_to_meters(airport.elevation)/9)).floor
+    (qnh - (Converter.feet_to_meters(airport.elevation)/9))
 
   end
 
   def mm_from_hpa(hpa)
-    (hpa.to_i * 0.750098697).floor
+    (hpa.to_i * 0.750098697)
   end
 end
