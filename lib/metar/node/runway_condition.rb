@@ -80,7 +80,7 @@ class METAR::Node::RunwayCondition < METAR::Node::Base
         when 0..25, 91
           :poor
         when 26..29, 92
-          :poor_to_medium
+          :medium_to_poor
         when 30..35, 93
           :medium
         when 36..39, 94

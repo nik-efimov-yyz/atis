@@ -134,7 +134,7 @@ class ATIS::Section::RunwayCondition < ATIS::Section::Base
   def guess_friction_from_braking_action(braking_action)
     keys = {
         poor: 10..25,
-        poor_to_medium: 26..29,
+        medium_to_poor: 26..29,
         medium: 30..35,
         medium_to_good: 36..39,
         good: 40..59
