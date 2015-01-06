@@ -37,35 +37,38 @@ class ATIS::Section::Wind < ATIS::Section::Base
   def add_wind_speed_blocks_to_ru
     if wind.gusting?
       if wind.gusts.min.to_s.length < 2
-        digit_conversion(mps_from wind.gusts.min)
+        digit_conversion(wind.gusts.min)
       else
-        number_conversion(mps_from wind.gusts.min)
+        number_conversion(wind.gusts.min)
       end
       block :gusting_to
       if wind.gusts.max.to_s.length < 2
-        digit_conversion(mps_from wind.gusts.max)
+        digit_conversion(wind.gusts.max)
       else
-        number_conversion(mps_from wind.gusts.max)
+        number_conversion(wind.gusts.max)
       end
+      units_ru(wind.gusts.max)
     else
       if wind.speed.to_s.length < 2
-        digit_conversion(mps_from wind.speed)
+        digit_conversion(wind.speed)
       else
-        number_conversion(mps_from wind.speed)
+        number_conversion(wind.speed)
       end
+      units_ru(wind.speed)
     end
   end
 
   def add_wind_speed_blocks_to_en
     if wind.gusting?
-      text(mps_from wind.gusts.min)
+      text(wind.gusts.min)
       block :gusting
       block :to
-      text(mps_from wind.gusts.max)
+      text(wind.gusts.max)
+      units_en(wind.gusts.max)
     else
-      text(mps_from wind.speed)
+      text(wind.speed)
+      units_en(wind.speed)
     end
-    block :mps
   end
 
   def add_variable_wind_blocks_to_ru
@@ -105,4 +108,30 @@ class ATIS::Section::Wind < ATIS::Section::Base
       end
   end
 
+  def units_en(speed)
+    case wind.units
+      when "KT"
+        if speed == 1
+          block :knot
+        else
+          block :knots
+        end
+      when "MPS"
+        block :mps
+    end
+  end
+
+  def units_ru(speed)
+    case wind.units
+      when "KT"
+        if speed.to_i == 1 or speed.to_i % 10 == 1 and speed.to_i != 11
+          block :knots_1
+        elsif (2..4).include?(speed.to_i) or (2..4).include?(speed.to_i % 10 ) and (not (12..14).include?(speed.to_i))
+          block :knots_2_4
+        else
+          block :knots
+        end
+      when "MPS"
+    end
+  end
 end

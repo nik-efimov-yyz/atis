@@ -236,6 +236,9 @@ ru:
     variable_to: "до"
     degrees: "градусов"
     gusting_to: "порывы"
+    knots_1: "узел"
+    knots_2_4: "узла"
+    knots: "узлов"
 
   windshear:
     windshear: "сдвиг ветра"
