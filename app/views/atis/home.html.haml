@@ -65,6 +65,10 @@
           .checkbox
             = check_box_tag "extra[]", "birds", @token.params[:extra].try(:include?, "birds")
             Птицы
+        .col-md-8
+          .checkbox
+            = check_box_tag "extra[]", "lvp", @token.params[:extra].try(:include?, "lvp")
+            Процедуры Пониженной Видимости
 
       .form-group
         %label.col-md-4.control-label Эшелон Перехода

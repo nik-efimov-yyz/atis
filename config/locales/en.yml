@@ -31,6 +31,7 @@ en:
 
   extrainformation:
     birds: "flocks of birds possible in aerodrome area"
+    lvp: "low visibility procedures in effect"
 
   icing:
       prefix: "icing"
