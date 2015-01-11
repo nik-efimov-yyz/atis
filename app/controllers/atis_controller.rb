@@ -37,12 +37,13 @@ class AtisController < ApplicationController
         transition_level: options[:trlvl],
         extra: options[:extra],
         report_pressure_in: options[:pt],
-        languages: options[:lang]
+        languages: options[:lang],
+        closed_runways: options[:c_rwys]
     }
   end
 
   def params_split_to_arrays
-    [:arr, :apptype, :dep, :extra, :pt, :lang].each do |key|
+    [:arr, :apptype, :dep, :extra, :pt, :lang, :c_rwys].each do |key|
       params[key] = params[key].split(",") if params[key].is_a?(String)
     end
     params

@@ -9,6 +9,7 @@ class ATIS::Message
   section :arrival_runways
   section :departure_runways
   section :transition_level
+  section :closed_runways
   section :extra_information
   section :wind
   section :cavok
@@ -65,6 +66,10 @@ class ATIS::Message
 
   def extra
     @options[:extra] ||= []
+  end
+
+  def closed_runways
+    @options[:closed_runways] ||= []
   end
 
   def report_pressure_in

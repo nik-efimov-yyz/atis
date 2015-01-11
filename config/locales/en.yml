@@ -32,6 +32,8 @@ en:
   extrainformation:
     birds: "flocks of birds possible in aerodrome area"
     lvp: "low visibility procedures in effect"
+    taxiway: "taxiway"
+    closed: "closed"
 
   icing:
       prefix: "icing"
