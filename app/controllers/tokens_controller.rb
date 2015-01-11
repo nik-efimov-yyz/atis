@@ -15,7 +15,7 @@ class TokensController < ApplicationController
   private
 
   def token_params
-    params.permit(:pl, :sl, :trlvl, pt: [], apptype: [], extra: [], :c_rwyss)
+    params.permit(:pl, :sl, :trlvl, pt: [], apptype: [], extra: [], :c_rwys)
   end
 
 end
