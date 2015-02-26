@@ -1,7 +1,7 @@
 class METAR::Node::Visibility < METAR::Node::Base
 
   property :visibility do
-      match[1].to_i
+      match[2].to_i
   end
 
   property :unlimited? do
@@ -13,7 +13,15 @@ class METAR::Node::Visibility < METAR::Node::Base
   end
 
   property :units do
-    match[2].present? ? match[2] : "M"
+    match[3].present? ? match[2] : "M"
+  end
+
+  property :greater? do
+    match[1] == "P"
+  end
+
+  property :less? do
+    match[1] == "M"
   end
 
 

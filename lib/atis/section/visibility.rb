@@ -6,6 +6,13 @@ class ATIS::Section::Visibility < ATIS::Section::Base
     block :prefix
 
     case
+      when visibility.greater?
+        block :greater
+      when visibility.less?
+        block :less
+    end
+
+    case
       when visibility.unlimited?
         block :unlimited
       when visibility.less_than_50?
@@ -24,6 +31,12 @@ class ATIS::Section::Visibility < ATIS::Section::Base
 
   format :ru do
     block :prefix
+    case
+      when visibility.greater?
+        block :greater
+      when visibility.less?
+        block :less
+    end
     case
       when visibility.unlimited?
         block :unlimited

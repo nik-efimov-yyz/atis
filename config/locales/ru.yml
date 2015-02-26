@@ -223,9 +223,11 @@ ru:
 
   visibility:
     prefix: "видимость"
+    greater: "более"
+    less: "менее"
     unlimited: "более 10 км"
     kilometers: "км"
-    less_than_50: "менее пятьдесят"
+    less_than_50: "менее 50"
 
   warnings:
     prefix: "предупреждение"
