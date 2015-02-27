@@ -75,10 +75,10 @@
         .col-md-2
           = text_field_tag :trlvl, @token.params[:trlvl], class: "form-control"
 
-      -#.form-group
-      -#  %label.col-md-4.control-label Закрытые ВПП
-      -#  .col-md-2
-      -#    = text_field_tag :c_rwys, @token.params[:c_rwys], class: "form-control"
+      .form-group
+        %label.col-md-4.control-label Закрытые ВПП
+        .col-md-2
+          = text_field_tag :c_rwys, @token.params[:c_rwys], class: "form-control"
 
       .form-group
         %label.col-md-4.control-label Давление в:

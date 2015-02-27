@@ -45,14 +45,14 @@ class AtisController < ApplicationController
 
   def params_split_to_arrays
     [:arr, :apptype, :dep, :extra, :pt, :lang, :c_rwys].each do |key|
-      params[key] = params[key].split(",") if params[key].is_a?(String)
+      params[key] = params[key].split(",").map(&:strip) if params[key].is_a?(String)
     end
     params
   end
 
   def token_options_to_arrays
     {
-        closed_runways: @token.c_rwys.to_s.split(",")
+        c_rwys: @token.params[:c_rwys].to_s.split(",").map(&:strip)
     }
   end
 
