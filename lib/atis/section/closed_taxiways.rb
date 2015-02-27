@@ -8,9 +8,11 @@ class ATIS::Section::ClosedTaxiways < ATIS::Section::Base
 
       block :taxiway, scope: :extrainformation
 
-      taxiway_number, suffix = twy.split(/([a-zA-Z])/)
+
+      suffix, taxiway_number   = twy.match(/([a-zA-Z])?(\d{1,})?/).captures
+
+      text suffix.to_s.to_sym.upcase if suffix.present?
       text taxiway_number
-      text suffix.upcase.to_sym if suffix.present?
 
     end
 
@@ -25,9 +27,11 @@ class ATIS::Section::ClosedTaxiways < ATIS::Section::Base
 
       block :taxiway, scope: :extrainformation
 
-      taxiway_number, suffix = twy.split(/([a-zA-Z])/)
+      suffix, taxiway_number = twy.match(/([a-zA-Z])?(\d{1,})?/).captures
+
+      text suffix.to_s.to_sym.upcase if suffix.present?
       rwy_number_conversion taxiway_number
-      text suffix.upcase.to_sym if suffix.present?
+
       count += 1
     end
 
