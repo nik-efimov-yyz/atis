@@ -27,6 +27,7 @@ class AtisController < ApplicationController
 
     options = ((@token && @token.params) || {}).with_indifferent_access
     options[:lang] = [@token.params[:pl], @token.params[:sl]].reject { |l| l.blank? } if @token.present?
+    options.merge! token_options_to_arrays if @token.present?
     options.merge! params_split_to_arrays
 
     {
@@ -47,6 +48,12 @@ class AtisController < ApplicationController
       params[key] = params[key].split(",") if params[key].is_a?(String)
     end
     params
+  end
+
+  def token_options_to_arrays
+    {
+        closed_runways: @token.c_rwys.to_s.split(",")
+    }
   end
 
 end
