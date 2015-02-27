@@ -29,7 +29,7 @@
 
       .form-group
         %label.col-md-4.control-label Типы Захода
-        .col-md-8
+        .col-md-3
           .checkbox
             = check_box_tag "apptype[]", "ils", @token.params[:apptype].include?("ils")
             ИЛС
@@ -45,6 +45,7 @@
           .checkbox
             = check_box_tag "apptype[]", "ndb", @token.params[:apptype].include?("ndb")
             ОПРС
+        .col-md-5
           .checkbox
             = check_box_tag "apptype[]", "rev_ndb", @token.params[:apptype].include?("rev_ndb")
             ОПРС Обратного Старта
@@ -72,13 +73,18 @@
 
       .form-group
         %label.col-md-4.control-label Эшелон Перехода
-        .col-md-2
+        .col-md-8
           = text_field_tag :trlvl, @token.params[:trlvl], class: "form-control"
 
       .form-group
         %label.col-md-4.control-label Закрытые ВПП
-        .col-md-2
+        .col-md-8
           = text_field_tag :c_rwys, @token.params[:c_rwys], class: "form-control"
+
+      .form-group
+        %label.col-md-4.control-label Закрытые РД
+        .col-md-8
+          = text_field_tag :c_twys, @token.params[:c_twys], class: "form-control"
 
       .form-group
         %label.col-md-4.control-label Давление в:

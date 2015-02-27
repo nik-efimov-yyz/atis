@@ -21,6 +21,8 @@ class ATIS::Section::ClosedRunways < ATIS::Section::Base
 
   format :ru do
 
+    count = 0
+
     message.closed_runways.each do |rwy|
 
       block :runway, scope: :runway
@@ -29,9 +31,14 @@ class ATIS::Section::ClosedRunways < ATIS::Section::Base
       rwy_number_conversion runway_number
       block side.downcase.to_sym, scope: :runway if side.present?
 
+      count += 1
     end
 
-    block :closed, scope: :extrainformation
+    if count >= 2
+      block :closed_plural, scope: :extrainformation
+    else
+      block :closed_singular, scope: :extrainformation
+    end
 
   end
 
