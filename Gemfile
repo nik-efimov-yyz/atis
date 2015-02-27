@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem "haml"
 
-gem "sqlite3"
+
 
 gem "pg"
 
@@ -36,8 +36,9 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-
+  gem "sqlite3"
 end
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
