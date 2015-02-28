@@ -232,7 +232,7 @@ en:
     nosig: "no significant change"
 
   units:
-    meters: "m"
+    meters: " m"
 
   visibility:
     greater: "above"
