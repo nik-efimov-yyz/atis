@@ -157,9 +157,9 @@ en:
 
   runway:
     runway: "runway"
-    l: "L"
-    r: "R"
-    c: "C"
+    l: " L"
+    r: " R"
+    c: " C"
 
   runwaycondition:
     compacted_snow: "compacted snow"
@@ -238,7 +238,7 @@ en:
     greater: "above"
     less: "below"
     prefix: "visibility"
-    unlimited: "greater than 10 кm"
+    unlimited: "greater than 10 km"
     kilometers: "km"
     less_than_50: "below 50"
 
