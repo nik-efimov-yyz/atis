@@ -8,7 +8,8 @@ class AtisController < ApplicationController
   end
 
   def decode
-    @message = ATIS::Message.new(params[:icao], metar_options_from_params)
+
+    @message = ATIS::Message.new(params[:metar]||params[:icao], metar_options_from_params)
 
     respond_to do |format|
       format.html
