@@ -27,6 +27,7 @@ gem "haml"
 
 gem "pg"
 
+gem 'pry'
 gem 'rails_12factor', group: :production
 
 group :doc do
@@ -36,7 +37,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem "sqlite3"
+  gem 'rspec-its'
 end
 
 
