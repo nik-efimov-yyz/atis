@@ -7,7 +7,7 @@ describe METAR::Node::Wind do
   subject { metar_object.wind.first }
 
   context "normal" do
-    let(:metar) { "10006MPS" }
+    let(:metar) { " 10006MPS " }
     it {should_not be_variable}
     it { should_not be_gusting }
     its(:direction) { should == 100 }
@@ -18,7 +18,7 @@ describe METAR::Node::Wind do
   end
 
   context "direction variable given with VRB" do
-    let(:metar) { "VRB03KT" }
+    let(:metar) { " VRB03KT " }
     it { should be_variable }
     it { should_not be_gusting }
     its(:direction) { should == "VRB" }
@@ -29,7 +29,7 @@ describe METAR::Node::Wind do
   end
 
   context "direction variable given with V" do
-    let(:metar) { "15003MPS 120V180" }
+    let(:metar) { " 15003MPS 120V180 " }
     it { should be_variable }
     it { should_not be_gusting }
     its(:direction) { should == 150 }
@@ -40,7 +40,7 @@ describe METAR::Node::Wind do
   end
 
   context "wind gusting" do
-    let(:metar) { "26015G24MPS" }
+    let(:metar) { " 26015G24MPS " }
     it { should_not be_variable }
     it { should be_gusting }
     its(:direction) { should == 260 }
@@ -51,7 +51,7 @@ describe METAR::Node::Wind do
   end
 
   context "wind gusting and variable as VRB" do
-    let(:metar) { "VRB10G15MPS" }
+    let(:metar) { " VRB10G15MPS " }
     it { should be_variable }
     it { should be_gusting }
     its(:direction) { should == "VRB" }
@@ -62,7 +62,7 @@ describe METAR::Node::Wind do
   end
 
   context "wind gusting and variable as V" do
-    let(:metar) { "30006G16MPS 270V340" }
+    let(:metar) { " 30006G16MPS 270V340 " }
     it { should be_variable }
     it { should be_gusting }
     its(:direction) { should == 300 }
@@ -73,7 +73,7 @@ describe METAR::Node::Wind do
   end
 
   context "wind calm" do
-    let(:metar) { "00000MPS" }
+    let(:metar) { " 00000MPS " }
     it { should be_calm }
   end
 end
