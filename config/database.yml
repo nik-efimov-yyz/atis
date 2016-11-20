@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  database: vatatis_development
+  pool: 5
+  username: super
+  password: super
+test:
+  adapter: postgresql
+  database: vatatis_test
+  pool: 5
+  username: super
+  password: super
+production:
+  adapter: postgresql
+  database: CHANGE
+  username: CHANGE
+  password: CHANGE
+  pool: 5

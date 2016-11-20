@@ -16,12 +16,12 @@ describe METAR::Node::Rvr do
     subject { rvr.variable? }
     context "group includes V" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/1300VP2000D FZFG" }
-      it { should be_true }
+      it { should be true }
     end
 
     context "group does not include V" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/1300 " }
-      it { should be_false }
+      it { should be false }
     end
 
   end
@@ -68,12 +68,12 @@ describe METAR::Node::Rvr do
     subject { rvr.peak? }
     context "peak present"  do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/P2000U " }
-      it { should be_true }
+      it { should be true }
     end
 
     context "peak absent" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/2000D " }
-      it { should be_false }
+      it { should be false }
     end
 
   end
@@ -82,12 +82,12 @@ describe METAR::Node::Rvr do
     subject { rvr.minimum? }
     context  "minimum present" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/M0050D " }
-      it { should be_true }
+      it { should be true }
     end
 
     context "minimum absent" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 R23R/0050N " }
-      it { should be_false }
+      it { should be false }
     end
 
   end

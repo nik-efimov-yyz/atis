@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails atis: test" uuid="58ade185-e970-4560-b928-f4f45778ca8f">
+      <database-info product="PostgreSQL" version="9.5.4" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>super</user-name>
+      <user-password>dfd9dfdfdfdadfcfdfd8</user-password>
+    </data-source>
+    <data-source name="Rails atis: production" uuid="2106e00e-e34c-4c78-aadd-16cf3c04204d">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <user-name>CHANGE</user-name>
+      <user-password>dfe9dfe2dfebdfe4dfeddfef</user-password>
+    </data-source>
+    <data-source name="Rails atis: development" uuid="0ddde684-43fb-40a3-8b95-1d1f245cea5f">
+      <database-info product="PostgreSQL" version="9.5.4" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>super</user-name>
+      <user-password>dfd9dfdfdfdadfcfdfd8</user-password>
+      <resolve-scope>vatatis_development:public,super</resolve-scope>
+    </data-source>
+  </component>
+</project>

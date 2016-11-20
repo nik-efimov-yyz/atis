@@ -164,7 +164,7 @@ describe METAR::Node::RunwayCondition do
 
     context "26..29" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 07////28 FZFG" }
-      it { should == :poor_to_medium }
+      it { should == :medium_to_poor }
     end
 
     context "30..35" do
@@ -189,7 +189,7 @@ describe METAR::Node::RunwayCondition do
 
     context "92" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 07////92 FZFG" }
-      it { should == :poor_to_medium }
+      it { should == :medium_to_poor }
     end
 
     context "93" do
@@ -214,7 +214,7 @@ describe METAR::Node::RunwayCondition do
 
     context "00-90" do
       let(:metar) { "UAAA 031800Z 14002MPS 0550 07////37 FZFG" }
-      it { should == 0.37 }
+      it { should == "0.37" }
     end
 
   end
